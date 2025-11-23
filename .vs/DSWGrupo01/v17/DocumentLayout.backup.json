@@ -1,14 +1,13 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\oepb8\\Documents\\Cibertec\\Cursos\\5TO CICLO\\DSW I\\DSWGrupo01\\",
+  "WorkspaceRootPath": "C:\\Users\\Adriana-\\Desktop\\ronald study\\ciclo5\\4695 DESARROLLO DE SERVICIOS WEB I\\DSWGrupo1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1BEB5871-BC6A-4F69-9BD5-E406243B8271}|DSWGrupo01\\DSWGrupo01.csproj|c:\\users\\oepb8\\documents\\cibertec\\cursos\\5to ciclo\\dsw i\\dswgrupo01\\dswgrupo01\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{1BEB5871-BC6A-4F69-9BD5-E406243B8271}|DSWGrupo01\\DSWGrupo01.csproj|c:\\users\\adriana-\\desktop\\ronald study\\ciclo5\\4695 desarrollo de servicios web i\\dswgrupo1\\dswgrupo01\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{1BEB5871-BC6A-4F69-9BD5-E406243B8271}|DSWGrupo01\\DSWGrupo01.csproj|solutionrelative:dswgrupo01\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1BEB5871-BC6A-4F69-9BD5-E406243B8271}|DSWGrupo01\\DSWGrupo01.csproj|c:\\users\\oepb8\\documents\\cibertec\\cursos\\5to ciclo\\dsw i\\dswgrupo01\\dswgrupo01\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1BEB5871-BC6A-4F69-9BD5-E406243B8271}|DSWGrupo01\\DSWGrupo01.csproj|solutionrelative:dswgrupo01\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/DSWGrupo01/True/SqlTable/dbo.vinilo.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,36 +17,30 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\oepb8\\Documents\\Cibertec\\Cursos\\5TO CICLO\\DSW I\\DSWGrupo01\\DSWGrupo01\\Views\\Home\\Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Adriana-\\Desktop\\ronald study\\ciclo5\\4695 DESARROLLO DE SERVICIOS WEB I\\DSWGrupo1\\DSWGrupo01\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "DSWGrupo01\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\oepb8\\Documents\\Cibertec\\Cursos\\5TO CICLO\\DSW I\\DSWGrupo01\\DSWGrupo01\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "DSWGrupo01\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\Adriana-\\Desktop\\ronald study\\ciclo5\\4695 DESARROLLO DE SERVICIOS WEB I\\DSWGrupo1\\DSWGrupo01\\Views\\Home\\Index.cshtml*",
+              "RelativeToolTip": "DSWGrupo01\\Views\\Home\\Index.cshtml*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-17T02:21:42.544Z",
+              "WhenOpened": "2025-11-23T00:34:18.236Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\oepb8\\Documents\\Cibertec\\Cursos\\5TO CICLO\\DSW I\\DSWGrupo01\\DSWGrupo01\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "DSWGrupo01\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\oepb8\\Documents\\Cibertec\\Cursos\\5TO CICLO\\DSW I\\DSWGrupo01\\DSWGrupo01\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "DSWGrupo01\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-17T02:21:38.576Z"
+              "Title": "dbo.vinilo [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/DSWGrupo01/True/SqlTable/dbo.vinilo.sql",
+              "ToolTip": "dbo.vinilo [Data]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-11-23T00:32:37.478Z",
+              "EditorCaption": ""
             }
           ]
         }

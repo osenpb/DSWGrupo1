@@ -8,6 +8,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<ViniloRepository>(); // para inyeccion de dependencias
 builder.Services.AddScoped<ViniloService>(); // para inyeccion de dependencias
+builder.Services.AddScoped<HomeService>();
 
 var app = builder.Build();
 
