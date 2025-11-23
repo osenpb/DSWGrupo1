@@ -1,0 +1,39 @@
+﻿@model List<DSWGrupo01.Models.CarritoProducto>
+
+<h2>Tu Carrito</h2>
+
+@if (!Model.Any())
+{
+    <p>Tu carrito está vacío</p>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>Vinilo</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Total</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.viniloId</td>
+                <td>S/ @item.precio</td>
+                <td>
+                    <a href="/Carrito/Menos/@item.Id" class="btn btn-sm btn-secondary">-</a>
+                    @item.cantidad
+                    <a href="/Carrito/Mas/@item.Id" class="btn btn-sm btn-secondary">+</a>
+                </td>
+                <td>S/ @(item.precio * item.cantidad)</td>
+                <td>
+                    <a href="/Carrito/Eliminar/@item.Id" class="btn btn-danger btn-sm">X</a>
+                </td>
+            </tr>
+        }
+    </table>
+
+    <a href="/Carrito/Vaciar" class="btn btn-warning">Vaciar carrito</a>
+}

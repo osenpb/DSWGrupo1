@@ -26,11 +26,8 @@ namespace DSWGrupo01.Service
         {
             var vinilo = await _repository.ObtenerViniloPorIdAsync(id);
             if (vinilo == null)
-                throw new EntityNotFoundException(EntityName, id); // 
-            return vinilo;
+                throw new EntityNotFoundException(EntityName, id);
+                return vinilo;
         }
-
-
-
     }
 }
