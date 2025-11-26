@@ -16,6 +16,8 @@ builder.Services.AddSession(options =>
 
 builder.Services.AddScoped<UsuarioRepository>();
 builder.Services.AddScoped<UsuarioService>();
+builder.Services.AddScoped<VentaRepository>();
+builder.Services.AddScoped<VentaService>();
 builder.Services.AddScoped<CarritoRepository>();
 builder.Services.AddScoped<CarritoService>();
 builder.Services.AddScoped<ViniloRepository>(); // para inyeccion de dependencias

@@ -1,0 +1,226 @@
+﻿@model DSWGrupo01.Models.PagoModel
+
+@{
+    ViewBag.Title = "Finalizar Compra";
+}
+
+<h2 class="mb-4">Finalizar compra</h2>
+
+<form asp-action="FinalizarCompra" method="post">
+    @if (TempData["Errores"] != null)
+    {
+        <div class="alert alert-danger">
+            <strong>Errores detectados:</strong> @TempData["Errores"]
+        </div>
+    }
+    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+    <!--   Datos del usuario -->
+    <h4 class="mb-3">Datos del comprador</h4>
+
+    <div class="mb-3">
+        <label asp-for="Nombre" class="form-label"></label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Dni" class="form-label"></label>
+        <input asp-for="Dni" class="form-control" />
+        <span asp-validation-for="Dni" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Telefono" class="form-label"></label>
+        <input asp-for="Telefono" class="form-control" />
+        <span asp-validation-for="Telefono" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Direccion" class="form-label"></label>
+        <input asp-for="Direccion" class="form-control" />
+        <span asp-validation-for="Direccion" class="text-danger"></span>
+    </div>
+
+    <!--  Crear cuenta con datos ingresados -->
+    @if (Context.Session.GetInt32("idUsuario") == null)
+    {
+        <div class="form-check mb-3">
+            <input asp-for="CrearCuenta" class="form-check-input" id="chkCuenta" type="checkbox" />
+            <label class="form-check-label" for="chkCuenta">
+                Crear una cuenta con estos datos
+            </label>
+        </div>
+
+        <div id="contenedorPassword" style="display:none;">
+            <div class="mb-3">
+                <label asp-for="Contrasenia" class="form-label"></label>
+                <input asp-for="Contrasenia" class="form-control" />
+                <span asp-validation-for="Contrasenia" class="text-danger"></span>
+            </div>
+        </div>
+    }
+
+    <hr class="my-4" />
+
+    <!-- Dirección de envío distinta -->
+
+    <div class="form-check mb-3">
+        <input asp-for="UsarDireccionDiferente" class="form-check-input" id="chkDireccion" type="checkbox" />
+        <label class="form-check-label" for="chkDireccion">
+            Enviar a una dirección diferente
+        </label>
+    </div>
+
+    <div id="contenedorDireccionDiferente" style="display:none;">
+        <h5 class="mb-3">Nueva dirección de envío</h5>
+        <div class="mb-3">
+            <label asp-for="Direccion_Envio" class="form-label">Dirección de envío</label>
+            <input asp-for="Direccion_Envio" class="form-control" />
+            <span asp-validation-for="Direccion_Envio" class="text-danger"></span>
+        </div>
+    </div>
+
+    <hr class="my-4" />
+
+    <!-- Carrito -->
+    <h4 class="mb-3">Resumen de tu carrito</h4>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Vinilo</th>
+                <th>Artista</th>
+                <th>Precio Unitario</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>@ObtenerTitulo(item.viniloId)</td>
+                    <td>@ObtenerArtista(item.viniloId)</td>
+                    <td>S/ @item.precio</td>
+                    <td>@item.cantidad</td>
+                    <td>S/ @(item.cantidad* item.precio)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="alert alert-info">
+        <strong>Total a pagar:</strong> S/ @Model.Total
+    </div>
+
+    <hr class="my-4" />
+
+    <!-- Pago -->
+
+    <h4 class="mb-3">Método de pago</h4>
+
+    <div class="form-check">
+        <input class="form-check-input" type="radio" asp-for="Metodo_Pago" value="YapePlin" id="PagoYapePlin" />
+        <label class="form-check-label" for="PagoYapePlin">Yape o Plin</label>
+    </div>
+
+    <div class="form-check">
+        <input class="form-check-input" type="radio" asp-for="Metodo_Pago" value="Transferencia" id="PagoTransferencia" />
+        <label class="form-check-label" for="PagoTransferencia">Transferencia bancaria</label>
+    </div>
+
+    <div class="form-check mb-4">
+        <input class="form-check-input" type="radio" asp-for="Metodo_Pago" value="Tarjeta" id="PagoTarjeta" />
+        <label class="form-check-label" for="PagoTarjeta">Tarjeta de crédito o débito</label>
+    </div>
+
+    <button type="submit" class="btn btn-success btn-lg">Pagar ahora</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        // Mostrar/ocultar contraseña
+        const chkCuenta = document.getElementById("chkCuenta");
+        if (chkCuenta) {
+            const pw = document.getElementById("contenedorPassword");
+
+            function actualizarPassword() {
+                pw.style.display = chkCuenta.checked ? "block" : "none";
+            }
+
+            chkCuenta.addEventListener("change", actualizarPassword);
+            actualizarPassword();
+        }
+
+        // Dirección diferente
+        const chkDireccion = document.getElementById("chkDireccion");
+        const contDir = document.getElementById("contenedorDireccionDiferente");
+
+        function actualizarDireccion() {
+            contDir.style.display = chkDireccion.checked ? "block" : "none";
+        }
+
+        chkDireccion.addEventListener("change", actualizarDireccion);
+        actualizarDireccion();
+    </script>
+}
+
+@functions {
+    private List<DSWGrupo01.Models.ViniloModel> vinilosFijos = new List<DSWGrupo01.Models.ViniloModel>
+    {
+        new DSWGrupo01.Models.ViniloModel
+        {
+            Id = 1,
+            Titulo = "Abbey Road",
+            Artista = "The Beatles",
+            Anio = new DateTime(1969, 9, 26),
+            Precio = 45.50m,
+            Stock = 10,
+            ImagenUrl = "https://via.placeholder.com/200",
+            Preview = "https://via.placeholder.com/150",
+            Descripcion = "Álbum clásico de The Beatles",
+            FechaIngreso = "2024-11-26"
+        },
+        new DSWGrupo01.Models.ViniloModel
+        {
+            Id = 2,
+            Titulo = "Dark Side of the Moon",
+            Artista = "Pink Floyd",
+            Anio = new DateTime(1973, 3, 1), // Fecha corregida
+            Precio = 75.00m,
+            Stock = 15,
+            ImagenUrl = "https://via.placeholder.com/200",
+            Preview = "https://via.placeholder.com/150",
+            Descripcion = "Álbum icónico de Pink Floyd",
+            FechaIngreso = "2024-11-26"
+        },
+        new DSWGrupo01.Models.ViniloModel
+        {
+            Id = 3,
+            Titulo = "Back in Black",
+            Artista = "AC/DC",
+            Anio = new DateTime(1980, 7, 25),
+            Precio = 60.00m,
+            Stock = 20,
+            ImagenUrl = "https://via.placeholder.com/200",
+            Preview = "https://via.placeholder.com/150",
+            Descripcion = "Álbum emblemático de AC/DC",
+            FechaIngreso = "2024-11-26"
+        }
+    };
+
+    private string ObtenerTitulo(int idVinilo) =>
+        vinilosFijos.FirstOrDefault(v => v.Id == idVinilo)?.Titulo ?? "Desconocido";
+
+    private string ObtenerArtista(int idVinilo) =>
+        vinilosFijos.FirstOrDefault(v => v.Id == idVinilo)?.Artista ?? "Desconocido";
+}
