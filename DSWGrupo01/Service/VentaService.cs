@@ -31,7 +31,7 @@ namespace DSWGrupo01.Service
             var productos = await _repo.ObtenerProductosDelCarrito(carrito.Id);
 
             model.Items = productos;
-            model.Total = productos.Sum(x => x.cantidad * x.precio);
+            model.Total = productos.Sum(x => x.Cantidad * x.Precio);
         }
 
 

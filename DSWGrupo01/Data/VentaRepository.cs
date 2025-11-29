@@ -35,8 +35,8 @@ namespace DSWGrupo01.Data
                         carrito = new Carrito
                         {
                             Id = reader.GetInt32(0),
-                            sessionId = reader.GetString(1),
-                            fecha_ingreso = reader.GetDateTime(2)
+                            Id_Usuario = reader.GetInt32(1),
+                            Fecha_Ingreso = reader.GetDateTime(2)
                         };
                     }
                 }
@@ -67,8 +67,8 @@ namespace DSWGrupo01.Data
                         carrito = new Carrito
                         {
                             Id = reader.GetInt32(0),
-                            sessionId = reader.GetString(1),
-                            fecha_ingreso = reader.GetDateTime(2)
+                            Id_Usuario = reader.GetInt32(1),
+                            Fecha_Ingreso = reader.GetDateTime(2)
                         };
                     }
                 }
@@ -99,10 +99,10 @@ namespace DSWGrupo01.Data
                         items.Add(new CarritoProducto
                         {
                             Id = reader.GetInt32(0),
-                            carritoId = reader.GetInt32(1),
-                            viniloId = reader.GetInt32(2),
-                            cantidad = reader.GetInt32(3),
-                            precio = reader.GetDecimal(4)
+                            CarritoId = reader.GetInt32(1),
+                            ViniloId = reader.GetInt32(2),
+                            Cantidad = reader.GetInt32(3),
+                            Precio = reader.GetDecimal(4)
                         });
                     }
                 }
@@ -154,9 +154,9 @@ namespace DSWGrupo01.Data
                     using (var cmdDet = new SqlCommand(sqlDetalle, conn))
                     {
                         cmdDet.Parameters.AddWithValue("@IdVenta", idVenta);
-                        cmdDet.Parameters.AddWithValue("@IdVinilo", item.viniloId);
-                        cmdDet.Parameters.AddWithValue("@Cantidad", item.cantidad);
-                        cmdDet.Parameters.AddWithValue("@PrecioUnitario", item.precio);
+                        cmdDet.Parameters.AddWithValue("@IdVinilo", item.ViniloId);
+                        cmdDet.Parameters.AddWithValue("@Cantidad", item.Cantidad);
+                        cmdDet.Parameters.AddWithValue("@PrecioUnitario", item.Precio);
 
                         await cmdDet.ExecuteNonQueryAsync();
                     }

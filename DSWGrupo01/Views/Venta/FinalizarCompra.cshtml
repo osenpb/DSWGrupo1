@@ -106,11 +106,11 @@
             @foreach (var item in Model.Items)
             {
                 <tr>
-                    <td>@ObtenerTitulo(item.viniloId)</td>
-                    <td>@ObtenerArtista(item.viniloId)</td>
-                    <td>S/ @item.precio</td>
-                    <td>@item.cantidad</td>
-                    <td>S/ @(item.cantidad* item.precio)</td>
+                    <td>@ObtenerTitulo(item.ViniloId)</td>
+                    <td>@ObtenerArtista(item.ViniloId)</td>
+                    <td>S/ @item.Precio</td>
+                    <td>@item.Cantidad</td>
+                    <td>S/ @(item.Cantidad* item.Precio)</td>
                 </tr>
             }
         </tbody>

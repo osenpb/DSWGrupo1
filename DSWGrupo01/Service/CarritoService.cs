@@ -6,45 +6,25 @@ namespace DSWGrupo01.Service
     public class CarritoService
     {
         private readonly CarritoRepository _repo;
-
         public CarritoService(CarritoRepository repo)
         {
             _repo = repo;
         }
 
-        public async Task<int> ObtenerOCrear(string sessionId)
-        {
-            var carrito = await _repo.ObtenerCarritoPorSession(sessionId);
+        public int ObtenerCarritoUsuario(int Id_Usuario)
+            => _repo.ObtenerCarritoUsuario(Id_Usuario);
 
-            if (carrito.HasValue)
-                return carrito.Value;
+        public void AgregarProducto(int carritoId, int viniloId, decimal precio)
+            => _repo.AgregarProducto(carritoId, viniloId, precio);
 
-            return await _repo.CrearCarrito(sessionId);
-        }
+        public void CambiarCantidad(int itemId, int delta)
+            => _repo.CambiarCantidad(itemId, delta);
 
-        public async Task Agregar(int carritoId, int viniloId, decimal precio)
-        {
-            await _repo.AgregarProducto(carritoId, viniloId, 1, precio);
-        }
+        public void EliminarItem(int id)
+            => _repo.EliminarItem(id);
 
-        public async Task<List<CarritoProducto>> ObtenerItems(int carritoId)
-        {
-            return await _repo.ObtenerProductos(carritoId);
-        }
-
-        public async Task CambiarCantidad(int id, int cantidad)
-        {
-            await _repo.UpdateCantidad(id, cantidad);
-        }
-
-        public async Task Eliminar(int id)
-        {
-            await _repo.EliminarItem(id);
-        }
-
-        public async Task Vaciar(int carritoId)
-        {
-            await _repo.Vaciar(carritoId);
-        }
+        public List<CarritoProductoViewModel> ObtenerItems(int carritoId)
+            => _repo.ObtenerCarrito(carritoId);
     }
 }
+

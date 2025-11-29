@@ -5,72 +5,60 @@ namespace DSWGrupo01.Controllers
 {
     public class CarritoController : Controller
     {
-        private readonly CarritoService _service;
+        private readonly CarritoService _cart;
+        private readonly ViniloService _vinilos;
 
-        public CarritoController(CarritoService service)
+        public CarritoController(CarritoService cart, ViniloService vinilos)
         {
-            _service = service;
+            _cart = cart;
+            _vinilos = vinilos;
         }
 
-        public async Task<IActionResult> Index()
-        {
-            string sessionId = HttpContext.Session.Id;
-            int carritoId = await _service.ObtenerOCrear(sessionId);
+        private int? IdUsuario =>
+            HttpContext.Session.GetInt32("idUsuario");
 
-            var items = await _service.ObtenerItems(carritoId);
+        public IActionResult Index()
+        {
+            if (IdUsuario == null)
+                return RedirectToAction("Login", "Usuario");
+
+            int carritoId = _cart.ObtenerCarritoUsuario(IdUsuario.Value);
+            var items = _cart.ObtenerItems(carritoId);
             return View(items);
         }
 
-        public async Task<IActionResult> Agregar(int viniloId, decimal precio)
+        public async Task<IActionResult> Agregar(int viniloId)
         {
-            string sessionId = HttpContext.Session.Id;
-            int carritoId = await _service.ObtenerOCrear(sessionId);
+            if (IdUsuario == null)
+                return RedirectToAction("Login", "Usuario");
 
-            await _service.Agregar(carritoId, viniloId, precio);
+            int carritoId = _cart.ObtenerCarritoUsuario(IdUsuario.Value);
 
-            return RedirectToAction("Index", "Carrito");
-        }
+            var v = await _vinilos.ObtenerViniloPorIdAsync(viniloId);
 
-        public async Task<IActionResult> Mas(int id)
-        {
-            // ID del CarritoProducto
-            string sessionId = HttpContext.Session.Id;
-            int carritoId = await _service.ObtenerOCrear(sessionId);
+            if (v == null)
+                return NotFound();
 
-            var items = await _service.ObtenerItems(carritoId);
-            var item = items.First(x => x.Id == id);
-
-            await _service.CambiarCantidad(id, item.cantidad + 1);
+            _cart.AgregarProducto(carritoId, viniloId, v.Precio);
 
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> Menos(int id)
+        public IActionResult CambiarCantidad(int id, int delta)
         {
-            string sessionId = HttpContext.Session.Id;
-            int carritoId = await _service.ObtenerOCrear(sessionId);
+            if (IdUsuario == null)
+                return RedirectToAction("Login", "Usuario");
 
-            var items = await _service.ObtenerItems(carritoId);
-            var item = items.First(x => x.Id == id);
-
-            if (item.cantidad > 1)
-                await _service.CambiarCantidad(id, item.cantidad - 1);
-
-            return RedirectToAction("Index");
+            _cart.CambiarCantidad(id, delta);
+            return Ok();
         }
 
-        public async Task<IActionResult> Eliminar(int id)
+        public IActionResult Eliminar(int id)
         {
-            await _service.Eliminar(id);
-            return RedirectToAction("Index");
-        }
+            if (IdUsuario == null)
+                return RedirectToAction("Login", "Usuario");
 
-        public async Task<IActionResult> Vaciar()
-        {
-            string sessionId = HttpContext.Session.Id;
-            int carritoId = await _service.ObtenerOCrear(sessionId);
-
-            await _service.Vaciar(carritoId);
+            _cart.EliminarItem(id);
             return RedirectToAction("Index");
         }
     }

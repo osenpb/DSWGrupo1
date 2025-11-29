@@ -2,9 +2,9 @@
 {
     public class CarritoProducto{
         public int Id { get; set; }
-        public int carritoId { get; set; }
-        public int viniloId { get; set; }
-        public int cantidad { get; set; }
-        public decimal precio { get; set; }
+        public int CarritoId { get; set; }
+        public int ViniloId { get; set; }
+        public int Cantidad { get; set; }
+        public decimal Precio { get; set; }
     }
 }
