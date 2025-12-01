@@ -7,12 +7,14 @@ namespace DSWGrupo01.Controllers
     public class VentaController : Controller
     {
         private readonly UsuarioService _usuarioService;
-        private readonly VentaService _pagoService;
+        private readonly VentaService _ventaService;
 
-        public VentaController(UsuarioService usuarioService, VentaService pagoService)
+        private int? IdUsuario => HttpContext.Session.GetInt32("idUsuario");
+
+        public VentaController(UsuarioService usuarioService, VentaService ventaService)
         {
             _usuarioService = usuarioService;
-            _pagoService = pagoService;
+            _ventaService = ventaService;
         }
 
         // GET: /Venta/FinalizarCompra
@@ -21,11 +23,10 @@ namespace DSWGrupo01.Controllers
         {
             var model = new PagoModel();
 
-            var idUsuario = HttpContext.Session.GetInt32("idUsuario");
-
-            if (idUsuario != null)
+            if (IdUsuario != null)
             {
-                var usuario = await _usuarioService.ObtenerPorIdAsync(idUsuario.Value);
+                // Cargar datos del usuario
+                var usuario = await _usuarioService.ObtenerPorIdAsync(IdUsuario.Value);
 
                 if (usuario != null)
                 {
@@ -37,12 +38,13 @@ namespace DSWGrupo01.Controllers
                     model.Direccion = usuario.Direccion;
                 }
 
-                await _pagoService.CargarCarrito(model, idUsuario.Value);
+                // Cargar carrito del usuario
+                await _ventaService.CargarCarrito(model, IdUsuario.Value);
             }
             else
             {
-                // Usuario no logueado → carrito vacío, dejar hasta obtener carrito sin usuario logueado
-                model.Items = new List<CarritoProducto>();
+                // Carrito para un usuario no logueado (aún no implementado)
+                model.Items = new List<CarritoProductoViewModel>();
                 model.Total = 0;
             }
 
@@ -55,29 +57,31 @@ namespace DSWGrupo01.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> FinalizarCompra(PagoModel model)
         {
-            var idUsuario = HttpContext.Session.GetInt32("idUsuario");
-
-            if (idUsuario != null)
+            // Recargar carrito antes de validar o procesar
+            if (IdUsuario != null)
             {
-                await _pagoService.CargarCarrito(model, idUsuario.Value);
+                await _ventaService.CargarCarrito(model, IdUsuario.Value);
             }
             else
             {
-                model.Items = new List<CarritoProducto>();
+                model.Items = new List<CarritoProductoViewModel>();
                 model.Total = 0;
             }
 
-            // Validaciones para form de crear cuenta y cambiar direccion
+            // Validaciones adicionales
             if (model.CrearCuenta && string.IsNullOrWhiteSpace(model.Contrasenia))
             {
-                ModelState.AddModelError("Contrasenia", "Debe ingresar una contraseña si crea la cuenta.");
+                ModelState.AddModelError("Contrasenia",
+                    "Debe ingresar una contraseña si crea la cuenta.");
             }
 
             if (model.UsarDireccionDiferente && string.IsNullOrWhiteSpace(model.Direccion_Envio))
             {
-                ModelState.AddModelError("Direccion_Envio", "Debe ingresar la dirección de envío si eligió diferente.");
+                ModelState.AddModelError("Direccion_Envio",
+                    "Debe ingresar la dirección de envío si eligió una diferente.");
             }
 
+            // Si hay errores, volver a mostrar la vista con los datos
             if (!ModelState.IsValid)
             {
                 var errores = ModelState.Values
@@ -92,7 +96,8 @@ namespace DSWGrupo01.Controllers
                 return View(model);
             }
 
-            await _pagoService.ProcesarPagoAsync(model, _usuarioService, HttpContext);
+            // Procesar compra
+            await _ventaService.ProcesarPagoAsync(model, _usuarioService, HttpContext);
 
             TempData["Mensaje"] = "Compra realizada con éxito.";
 

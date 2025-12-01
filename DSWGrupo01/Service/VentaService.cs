@@ -21,7 +21,7 @@ namespace DSWGrupo01.Service
             if (carrito == null)
             {
                 model.Id_Carrito = null;
-                model.Items = new List<CarritoProducto>();
+                model.Items = new List<CarritoProductoViewModel>();
                 model.Total = 0;
                 return;
             }
@@ -31,7 +31,7 @@ namespace DSWGrupo01.Service
             var productos = await _repo.ObtenerProductosDelCarrito(carrito.Id);
 
             model.Items = productos;
-            model.Total = productos.Sum(x => x.Cantidad * x.Precio);
+            model.Total = productos.Sum(p => p.Subtotal);
         }
 
 

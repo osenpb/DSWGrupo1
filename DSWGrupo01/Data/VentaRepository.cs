@@ -13,19 +13,48 @@ namespace DSWGrupo01.Data
             _connectionString = config.GetConnectionString("DSWGrupo01");
         }
 
-        // 🔹 Obtener carrito por sessionId (invitados)
-        public async Task<Carrito?> ObtenerCarritoPorSession(string sessionId)
+        // Obtener carrito por sessionId (invitados)
+        //public async Task<Carrito?> ObtenerCarritoPorSession(string sessionId)
+        //{
+        //    Carrito? carrito = null;
+
+        //    var sql = @"SELECT Id, sessionId, fecha_ingreso 
+        //                FROM Carrito 
+        //                WHERE sessionId = @sessionId";
+
+        //    using (var conn = new SqlConnection(_connectionString))
+        //    using (var cmd = new SqlCommand(sql, conn))
+        //    {
+        //        cmd.Parameters.AddWithValue("@sessionId", sessionId);
+
+        //        await conn.OpenAsync();
+        //        using (var reader = await cmd.ExecuteReaderAsync())
+        //        {
+        //            if (await reader.ReadAsync())
+        //            {
+        //                carrito = new Carrito
+        //                {
+        //                    Id = reader.GetInt32(0),
+        //                    Id_Usuario = reader.GetInt32(1),
+        //                    Fecha_Ingreso = reader.GetDateTime(2)
+        //                };
+        //            }
+        //        }
+        //    }
+
+        //    return carrito;
+        //}
+
+        public async Task<Carrito?> ObtenerCarritoPorUsuario(int id)
         {
             Carrito? carrito = null;
 
-            var sql = @"SELECT Id, sessionId, fecha_ingreso 
-                        FROM Carrito 
-                        WHERE sessionId = @sessionId";
+            var sql = @"SELECT * FROM Carrito WHERE Id_usuario = @id";
 
             using (var conn = new SqlConnection(_connectionString))
             using (var cmd = new SqlCommand(sql, conn))
             {
-                cmd.Parameters.AddWithValue("@sessionId", sessionId);
+                cmd.Parameters.AddWithValue("@id", id);
 
                 await conn.OpenAsync();
                 using (var reader = await cmd.ExecuteReaderAsync())
@@ -45,64 +74,33 @@ namespace DSWGrupo01.Data
             return carrito;
         }
 
-        // 🔹 Obtener carrito por usuario (solo si quieres unir carrito al loguearse)
-        public async Task<Carrito?> ObtenerCarritoPorUsuario(int idUsuario)
+        public async Task<List<CarritoProductoViewModel>> ObtenerProductosDelCarrito(int id)
         {
-            Carrito? carrito = null;
+            var items = new List<CarritoProductoViewModel>();
 
-            var sql = @"SELECT Id, sessionId, fecha_ingreso 
-                        FROM Carrito 
-                        WHERE Id_usuario = @id";
+            var sql = @"SELECT CP.Id, CP.ViniloId, V.titulo, V.imagen_url, CP.Precio, CP.Cantidad
+                        FROM CarritoProducto CP
+                        INNER JOIN Vinilo V ON V.Id = CP.ViniloId
+                        WHERE CP.CarritoId = @id";
 
             using (var conn = new SqlConnection(_connectionString))
             using (var cmd = new SqlCommand(sql, conn))
             {
-                cmd.Parameters.AddWithValue("@id", idUsuario);
-
-                await conn.OpenAsync();
-                using (var reader = await cmd.ExecuteReaderAsync())
-                {
-                    if (await reader.ReadAsync())
-                    {
-                        carrito = new Carrito
-                        {
-                            Id = reader.GetInt32(0),
-                            Id_Usuario = reader.GetInt32(1),
-                            Fecha_Ingreso = reader.GetDateTime(2)
-                        };
-                    }
-                }
-            }
-
-            return carrito;
-        }
-
-        // 🔹 Obtener productos
-        public async Task<List<CarritoProducto>> ObtenerProductosDelCarrito(int carritoId)
-        {
-            var items = new List<CarritoProducto>();
-
-            var sql = @"SELECT Id, carritoId, viniloId, cantidad, precio 
-                        FROM CarritoProducto
-                        WHERE carritoId = @id";
-
-            using (var conn = new SqlConnection(_connectionString))
-            using (var cmd = new SqlCommand(sql, conn))
-            {
-                cmd.Parameters.AddWithValue("@id", carritoId);
+                cmd.Parameters.AddWithValue("@id", id);
 
                 await conn.OpenAsync();
                 using (var reader = await cmd.ExecuteReaderAsync())
                 {
                     while (await reader.ReadAsync())
                     {
-                        items.Add(new CarritoProducto
+                        items.Add(new CarritoProductoViewModel
                         {
                             Id = reader.GetInt32(0),
-                            CarritoId = reader.GetInt32(1),
-                            ViniloId = reader.GetInt32(2),
-                            Cantidad = reader.GetInt32(3),
-                            Precio = reader.GetDecimal(4)
+                            ViniloId = reader.GetInt32(1),
+                            Titulo = reader.GetString(2),
+                            Imagen = reader.GetString(3),
+                            Precio = reader.GetDecimal(4),
+                            Cantidad = reader.GetInt32(5)
                         });
                     }
                 }
@@ -111,7 +109,6 @@ namespace DSWGrupo01.Data
             return items;
         }
 
-        // 🔹 Crear la venta y los detalles
         public async Task<int> CrearVentaAsync(PagoModel model, int? idUsuario)
         {
             int idVenta;
@@ -143,7 +140,6 @@ namespace DSWGrupo01.Data
                     idVenta = (int)await cmd.ExecuteScalarAsync();
                 }
 
-                // 🔹 Insertar detalles de venta
                 foreach (var item in model.Items)
                 {
                     var sqlDetalle = @"
@@ -166,10 +162,9 @@ namespace DSWGrupo01.Data
             return idVenta;
         }
 
-        // 🔹 Eliminar carrito COMPLETAMENTE
-        public async Task EliminarCarritoAsync(int idCarrito)
+        public async Task EliminarCarritoAsync(int id)
         {
-            string sqlDetalles = "DELETE FROM CarritoProducto WHERE carritoId = @IdCarrito";
+            string sqlDetalles = "DELETE FROM CarritoProducto WHERE CarritoId = @IdCarrito";
             string sqlCarrito = "DELETE FROM Carrito WHERE Id = @IdCarrito";
 
             using (var conn = new SqlConnection(_connectionString))
@@ -179,8 +174,8 @@ namespace DSWGrupo01.Data
                 using (var cmd1 = new SqlCommand(sqlDetalles, conn))
                 using (var cmd2 = new SqlCommand(sqlCarrito, conn))
                 {
-                    cmd1.Parameters.AddWithValue("@IdCarrito", idCarrito);
-                    cmd2.Parameters.AddWithValue("@IdCarrito", idCarrito);
+                    cmd1.Parameters.AddWithValue("@IdCarrito", id);
+                    cmd2.Parameters.AddWithValue("@IdCarrito", id);
 
                     await cmd1.ExecuteNonQueryAsync();
                     await cmd2.ExecuteNonQueryAsync();

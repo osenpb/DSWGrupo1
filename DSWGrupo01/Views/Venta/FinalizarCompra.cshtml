@@ -79,7 +79,6 @@
     </div>
 
     <div id="contenedorDireccionDiferente" style="display:none;">
-        <h5 class="mb-3">Nueva dirección de envío</h5>
         <div class="mb-3">
             <label asp-for="Direccion_Envio" class="form-label">Dirección de envío</label>
             <input asp-for="Direccion_Envio" class="form-control" />
@@ -96,7 +95,6 @@
         <thead>
             <tr>
                 <th>Vinilo</th>
-                <th>Artista</th>
                 <th>Precio Unitario</th>
                 <th>Cantidad</th>
                 <th>Subtotal</th>
@@ -106,11 +104,10 @@
             @foreach (var item in Model.Items)
             {
                 <tr>
-                    <td>@ObtenerTitulo(item.ViniloId)</td>
-                    <td>@ObtenerArtista(item.ViniloId)</td>
+                    <td>@item.Titulo</td>
                     <td>S/ @item.Precio</td>
                     <td>@item.Cantidad</td>
-                    <td>S/ @(item.Cantidad* item.Precio)</td>
+                    <td>S/ @item.Subtotal</td>
                 </tr>
             }
         </tbody>
@@ -172,55 +169,4 @@
         chkDireccion.addEventListener("change", actualizarDireccion);
         actualizarDireccion();
     </script>
-}
-
-@functions {
-    private List<DSWGrupo01.Models.ViniloModel> vinilosFijos = new List<DSWGrupo01.Models.ViniloModel>
-    {
-        new DSWGrupo01.Models.ViniloModel
-        {
-            Id = 1,
-            Titulo = "Abbey Road",
-            Artista = "The Beatles",
-            Anio = new DateTime(1969, 9, 26),
-            Precio = 45.50m,
-            Stock = 10,
-            ImagenUrl = "https://via.placeholder.com/200",
-            Preview = "https://via.placeholder.com/150",
-            Descripcion = "Álbum clásico de The Beatles",
-            FechaIngreso = "2024-11-26"
-        },
-        new DSWGrupo01.Models.ViniloModel
-        {
-            Id = 2,
-            Titulo = "Dark Side of the Moon",
-            Artista = "Pink Floyd",
-            Anio = new DateTime(1973, 3, 1), // Fecha corregida
-            Precio = 75.00m,
-            Stock = 15,
-            ImagenUrl = "https://via.placeholder.com/200",
-            Preview = "https://via.placeholder.com/150",
-            Descripcion = "Álbum icónico de Pink Floyd",
-            FechaIngreso = "2024-11-26"
-        },
-        new DSWGrupo01.Models.ViniloModel
-        {
-            Id = 3,
-            Titulo = "Back in Black",
-            Artista = "AC/DC",
-            Anio = new DateTime(1980, 7, 25),
-            Precio = 60.00m,
-            Stock = 20,
-            ImagenUrl = "https://via.placeholder.com/200",
-            Preview = "https://via.placeholder.com/150",
-            Descripcion = "Álbum emblemático de AC/DC",
-            FechaIngreso = "2024-11-26"
-        }
-    };
-
-    private string ObtenerTitulo(int idVinilo) =>
-        vinilosFijos.FirstOrDefault(v => v.Id == idVinilo)?.Titulo ?? "Desconocido";
-
-    private string ObtenerArtista(int idVinilo) =>
-        vinilosFijos.FirstOrDefault(v => v.Id == idVinilo)?.Artista ?? "Desconocido";
 }
