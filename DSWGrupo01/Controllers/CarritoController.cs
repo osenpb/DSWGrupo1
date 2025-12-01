@@ -27,7 +27,7 @@ namespace DSWGrupo01.Controllers
             return View(items);
         }
 
-        public async Task<IActionResult> Agregar(int viniloId)
+        public async Task<IActionResult> Agregar(int viniloId, int cantidad)
         {
             if (IdUsuario == null)
                 return RedirectToAction("Login", "Usuario");
@@ -39,7 +39,7 @@ namespace DSWGrupo01.Controllers
             if (v == null)
                 return NotFound();
 
-            _cart.AgregarProducto(carritoId, viniloId, v.Precio);
+            _cart.AgregarProducto(carritoId, viniloId, cantidad, v.Precio);
 
             return RedirectToAction("Index");
         }

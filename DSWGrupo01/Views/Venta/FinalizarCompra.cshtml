@@ -4,169 +4,190 @@
     ViewBag.Title = "Finalizar Compra";
 }
 
-<h2 class="mb-4">Finalizar compra</h2>
+<body style="background: #F4E4C2;">
+    <div class="container my-5" style="max-width: 750px;">
+    <div class="card shadow-lg border-0">
+            <div class="card-body p-5" style="background: #FBF6E9;">
 
-<form asp-action="FinalizarCompra" method="post">
-    @if (TempData["Errores"] != null)
-    {
-        <div class="alert alert-danger">
-            <strong>Errores detectados:</strong> @TempData["Errores"]
+            <h2 class="mb-4 fw-bold text-center">
+                Finalizar compra
+            </h2>
+
+                <form asp-action="FinalizarCompra" method="post">
+
+                @if (TempData["Errores"] != null)
+                {
+                    <div class="alert alert-danger">
+                        <strong>Errores detectados:</strong> @TempData["Errores"]
+                    </div>
+                }
+
+                <div asp-validation-summary="All" class="text-danger mb-4"></div>
+
+
+                <!-- DATOS DEL COMPRADOR -->
+                <h4 class="mb-3 fw-semibold text-secondary">Datos del comprador</h4>
+
+                <div class="row">
+                    <div class="col-md-8 mb-3">
+                        <label asp-for="Nombre" class="form-label fw-semibold"></label>
+                        <input asp-for="Nombre" class="form-control form-control-sm" />
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="Dni" class="form-label fw-semibold"></label>
+                        <input asp-for="Dni" class="form-control form-control-sm" />
+                        <span asp-validation-for="Dni" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-8 mb-3">
+                        <label asp-for="Email" class="form-label fw-semibold"></label>
+                        <input asp-for="Email" class="form-control form-control-sm" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="Telefono" class="form-label fw-semibold"></label>
+                        <input asp-for="Telefono" class="form-control form-control-sm" />
+                        <span asp-validation-for="Telefono" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label asp-for="Direccion" class="form-label fw-semibold"></label>
+                        <input asp-for="Direccion" class="form-control form-control-sm" />
+                        <span asp-validation-for="Direccion" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <!-- CREAR CUENTA -->
+                @if (Context.Session.GetInt32("idUsuario") == null)
+                {
+                    <div class="form-check mb-3">
+                        <input asp-for="CrearCuenta" class="form-check-input" id="chkCuenta" />
+                        <label class="form-check-label fw-semibold" for="chkCuenta">
+                            Crear una cuenta con estos datos
+                        </label>
+                    </div>
+
+                    <div id="contenedorPassword" class="row" style="display:none;">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Contrasenia" class="form-label fw-semibold"></label>
+                            <input asp-for="Contrasenia" class="form-control form-control-sm" />
+                            <span asp-validation-for="Contrasenia" class="text-danger"></span>
+                        </div>
+                    </div>
+                }
+
+                <hr class="my-4" />
+
+
+                <!-- DIRECCIÓN DIFERENTE -->
+                <h4 class="mb-3 fw-semibold text-secondary">Dirección de envío</h4>
+
+                <div class="form-check mb-3">
+                    <input asp-for="UsarDireccionDiferente" class="form-check-input" id="chkDireccion" />
+                    <label class="form-check-label fw-semibold" for="chkDireccion">
+                        Usar una dirección diferente
+                    </label>
+                </div>
+
+                <div id="contenedorDireccionDiferente" class="row" style="display:none;">
+                    <div class="col-md-12 mb-3">
+                        <label asp-for="Direccion_Envio" class="form-label fw-semibold"></label>
+                        <input asp-for="Direccion_Envio" class="form-control form-control-sm" />
+                        <span asp-validation-for="Direccion_Envio" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <hr class="my-4" />
+
+
+                <!-- CARRITO -->
+                <h4 class="mb-3 fw-semibold text-secondary">Resumen del carrito</h4>
+
+                <table class="table table-bordered table-sm">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="text-center">Vinilo</th>
+                            <th class="text-center">Precio</t>
+                            <th class="text-center" style="width: 90px;">Cant.</th>
+                            <th class="text-center">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Items)
+                        {
+                            <tr>
+                                <td class="text-center" style="background: #FFFFFF";>@item.Titulo</td>
+                                <td class="text-center" style="background: #FFFFFF">S/ @item.Precio</td>
+                                <td class="text-center" style="background: #FFFFFF">@item.Cantidad</td>
+                                <td class="text-center" style="background: #FFFFFF">S/ @item.Subtotal</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <div class="d-flex justify-content-end">
+                    <div class="alert alert-info fw-semibold px-3 py-2">
+                        Total: S/ @Model.Total
+                    </div>
+                </div>
+
+                <hr class="my-4" />
+
+
+                <!-- MÉTODO DE PAGO -->
+                <h4 class="mb-3 fw-semibold text-secondary">Método de pago</h4>
+
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="radio" asp-for="Metodo_Pago" value="YapePlin" />
+                    <label class="form-check-label fw-semibold">Yape o Plin</label>
+                </div>
+
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="radio" asp-for="Metodo_Pago" value="Transferencia" />
+                    <label class="form-check-label fw-semibold">Transferencia bancaria</label>
+                </div>
+
+                <div class="form-check mb-4">
+                    <input class="form-check-input" type="radio" asp-for="Metodo_Pago" value="Tarjeta" />
+                    <label class="form-check-label fw-semibold">Tarjeta de crédito o débito</label>
+                </div>
+
+                <button type="submit" class="btn btn-success btn-lg w-100 shadow-sm">
+                    Pagar ahora
+                </button>
+
+            </form>
+
         </div>
-    }
-    <div asp-validation-summary="All" class="text-danger mb-3"></div>
-
-    <!--   Datos del usuario -->
-    <h4 class="mb-3">Datos del comprador</h4>
-
-    <div class="mb-3">
-        <label asp-for="Nombre" class="form-label"></label>
-        <input asp-for="Nombre" class="form-control" />
-        <span asp-validation-for="Nombre" class="text-danger"></span>
     </div>
-
-    <div class="mb-3">
-        <label asp-for="Dni" class="form-label"></label>
-        <input asp-for="Dni" class="form-control" />
-        <span asp-validation-for="Dni" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Email" class="form-label"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Telefono" class="form-label"></label>
-        <input asp-for="Telefono" class="form-control" />
-        <span asp-validation-for="Telefono" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Direccion" class="form-label"></label>
-        <input asp-for="Direccion" class="form-control" />
-        <span asp-validation-for="Direccion" class="text-danger"></span>
-    </div>
-
-    <!--  Crear cuenta con datos ingresados -->
-    @if (Context.Session.GetInt32("idUsuario") == null)
-    {
-        <div class="form-check mb-3">
-            <input asp-for="CrearCuenta" class="form-check-input" id="chkCuenta" type="checkbox" />
-            <label class="form-check-label" for="chkCuenta">
-                Crear una cuenta con estos datos
-            </label>
-        </div>
-
-        <div id="contenedorPassword" style="display:none;">
-            <div class="mb-3">
-                <label asp-for="Contrasenia" class="form-label"></label>
-                <input asp-for="Contrasenia" class="form-control" />
-                <span asp-validation-for="Contrasenia" class="text-danger"></span>
-            </div>
-        </div>
-    }
-
-    <hr class="my-4" />
-
-    <!-- Dirección de envío distinta -->
-
-    <div class="form-check mb-3">
-        <input asp-for="UsarDireccionDiferente" class="form-check-input" id="chkDireccion" type="checkbox" />
-        <label class="form-check-label" for="chkDireccion">
-            Enviar a una dirección diferente
-        </label>
-    </div>
-
-    <div id="contenedorDireccionDiferente" style="display:none;">
-        <div class="mb-3">
-            <label asp-for="Direccion_Envio" class="form-label">Dirección de envío</label>
-            <input asp-for="Direccion_Envio" class="form-control" />
-            <span asp-validation-for="Direccion_Envio" class="text-danger"></span>
-        </div>
-    </div>
-
-    <hr class="my-4" />
-
-    <!-- Carrito -->
-    <h4 class="mb-3">Resumen de tu carrito</h4>
-
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Vinilo</th>
-                <th>Precio Unitario</th>
-                <th>Cantidad</th>
-                <th>Subtotal</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Items)
-            {
-                <tr>
-                    <td>@item.Titulo</td>
-                    <td>S/ @item.Precio</td>
-                    <td>@item.Cantidad</td>
-                    <td>S/ @item.Subtotal</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-
-    <div class="alert alert-info">
-        <strong>Total a pagar:</strong> S/ @Model.Total
-    </div>
-
-    <hr class="my-4" />
-
-    <!-- Pago -->
-
-    <h4 class="mb-3">Método de pago</h4>
-
-    <div class="form-check">
-        <input class="form-check-input" type="radio" asp-for="Metodo_Pago" value="YapePlin" id="PagoYapePlin" />
-        <label class="form-check-label" for="PagoYapePlin">Yape o Plin</label>
-    </div>
-
-    <div class="form-check">
-        <input class="form-check-input" type="radio" asp-for="Metodo_Pago" value="Transferencia" id="PagoTransferencia" />
-        <label class="form-check-label" for="PagoTransferencia">Transferencia bancaria</label>
-    </div>
-
-    <div class="form-check mb-4">
-        <input class="form-check-input" type="radio" asp-for="Metodo_Pago" value="Tarjeta" id="PagoTarjeta" />
-        <label class="form-check-label" for="PagoTarjeta">Tarjeta de crédito o débito</label>
-    </div>
-
-    <button type="submit" class="btn btn-success btn-lg">Pagar ahora</button>
-</form>
+</div>
+</body>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 
     <script>
-        // Mostrar/ocultar contraseña
         const chkCuenta = document.getElementById("chkCuenta");
         if (chkCuenta) {
             const pw = document.getElementById("contenedorPassword");
-
-            function actualizarPassword() {
+            chkCuenta.addEventListener("change", () => {
                 pw.style.display = chkCuenta.checked ? "block" : "none";
-            }
-
-            chkCuenta.addEventListener("change", actualizarPassword);
-            actualizarPassword();
+            });
         }
 
-        // Dirección diferente
         const chkDireccion = document.getElementById("chkDireccion");
         const contDir = document.getElementById("contenedorDireccionDiferente");
-
-        function actualizarDireccion() {
+        chkDireccion.addEventListener("change", () => {
             contDir.style.display = chkDireccion.checked ? "block" : "none";
-        }
-
-        chkDireccion.addEventListener("change", actualizarDireccion);
-        actualizarDireccion();
+        });
     </script>
 }

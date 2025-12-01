@@ -14,8 +14,8 @@ namespace DSWGrupo01.Service
         public int ObtenerCarritoUsuario(int Id_Usuario)
             => _repo.ObtenerCarritoUsuario(Id_Usuario);
 
-        public void AgregarProducto(int carritoId, int viniloId, decimal precio)
-            => _repo.AgregarProducto(carritoId, viniloId, precio);
+        public void AgregarProducto(int carritoId, int viniloId, int cantidad, decimal precio)
+            => _repo.AgregarProducto(carritoId, viniloId, cantidad, precio);
 
         public void CambiarCantidad(int itemId, int delta)
             => _repo.CambiarCantidad(itemId, delta);

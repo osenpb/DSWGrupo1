@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DSWGrupo01")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0535fafdd7c03b531f60bf4590b53b020b3351db")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bb7c905df92690d6951286f2795b81b9135e3bab")]
 [assembly: System.Reflection.AssemblyProductAttribute("DSWGrupo01")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DSWGrupo01")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

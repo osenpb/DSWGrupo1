@@ -17,7 +17,7 @@
                 <p>Precio: @item.Precio.ToString("C")</p>
 
                 <div class="d-flex">
-                    <button class="btn btn-outline-secondary btn-menos" data-id="@item.Id">-</button>
+                    <button class="btn btn-outline-secondary btn-menos" data-id="@item.Id" @(item.Cantidad == 1 ? "disabled" : "")>-</button>
                     <span class="px-2">@item.Cantidad</span>
                     <button class="btn btn-outline-secondary btn-mas" data-id="@item.Id">+</button>
                 </div>
@@ -43,3 +43,24 @@
 
     <a href="/Venta/FinalizarCompra" class="btn btn-success mt-3">Ir a pagar</a>
 </div>
+
+
+<script>
+    document.querySelectorAll(".btn-mas").forEach(btn => {
+        btn.addEventListener("click", function () {
+            const id = this.dataset.id;
+
+            fetch(`/Carrito/CambiarCantidad?id=${id}&delta=1`)
+                .then(() => location.reload());
+        });
+    });
+
+    document.querySelectorAll(".btn-menos").forEach(btn => {
+        btn.addEventListener("click", function () {
+            const id = this.dataset.id;
+
+            fetch(`/Carrito/CambiarCantidad?id=${id}&delta=-1`)
+                .then(() => location.reload());
+        });
+    });
+</script>

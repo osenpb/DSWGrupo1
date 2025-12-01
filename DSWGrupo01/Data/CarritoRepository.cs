@@ -36,7 +36,7 @@ public class CarritoRepository
     }
 
     // AGREGA ITEM
-    public void AgregarProducto(int carritoId, int viniloId, decimal precio)
+    public void AgregarProducto(int carritoId, int viniloId, int cantidad, decimal precio)
     {
         using (var con = new SqlConnection(_cn))
         {
@@ -44,11 +44,12 @@ public class CarritoRepository
 
             var cmd = new SqlCommand(@"
                 INSERT INTO CarritoProducto(CarritoId,ViniloId,Cantidad,Precio)
-                VALUES(@c,@v,1,@p)
+                VALUES(@c,@v,@k,@p)
             ", con);
 
             cmd.Parameters.AddWithValue("@c", carritoId);
             cmd.Parameters.AddWithValue("@v", viniloId);
+            cmd.Parameters.AddWithValue("@k", cantidad);
             cmd.Parameters.AddWithValue("@p", precio);
 
             cmd.ExecuteNonQuery();
