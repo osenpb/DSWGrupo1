@@ -27,8 +27,7 @@ namespace DSWGrupo01.Models
         public string? ImagenUrl { get; set; } // link de la imagen del vinilo
 
         [Display(Name = "Vista previa")]
-        [Required(ErrorMessage = "El link del preview es obligatorio")]
-        public string Preview { get; set; } // link de la cancion
+        public string? Preview { get; set; } // link de la cancion
 
         [Display(Name = "Descripción")]
         [Required(ErrorMessage = "La descripcion es obligatoria")]
