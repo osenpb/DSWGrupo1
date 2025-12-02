@@ -3,45 +3,198 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - DSWGrupo01</title>
+    <title>@ViewData["Title"] - Vinyl Lab</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/DSWGrupo01.styles.css" asp-append-version="true" />
+    <style>
+        /* Navbar Styles */
+        .custom-navbar {
+            background: linear-gradient(135deg, #8b6f47 0%, #6b5638 100%);
+            box-shadow: 0 4px 20px rgba(139, 111, 71, 0.3);
+            padding: 1rem 0;
+            border: none;
+        }
+
+        .navbar-brand-custom {
+            color: #fff !important;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+            .navbar-brand-custom:hover {
+                transform: scale(1.05);
+                color: #f5f5f0 !important;
+            }
+
+        .brand-icon {
+            font-size: 2rem;
+            animation: spin 3s linear infinite;
+        }
+
+        .nav-link-custom {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+            font-size: 1.05rem;
+            padding: 0.5rem 1.2rem !important;
+            margin: 0 0.2rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+            .nav-link-custom::before {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                width: 0;
+                height: 2px;
+                background: #fff;
+                transform: translateX(-50%);
+                transition: width 0.3s ease;
+            }
+
+            .nav-link-custom:hover {
+                color: #fff !important;
+                background: rgba(255, 255, 255, 0.1);
+                transform: translateY(-2px);
+            }
+
+                .nav-link-custom:hover::before {
+                    width: 70%;
+                }
+
+            .nav-link-custom.active {
+                background: rgba(255, 255, 255, 0.15);
+                color: #fff !important;
+            }
+
+        .navbar-toggler-custom {
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            padding: 0.5rem 0.75rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+            .navbar-toggler-custom:hover {
+                border-color: #fff;
+                background: rgba(255, 255, 255, 0.1);
+            }
+
+            .navbar-toggler-custom .navbar-toggler-icon {
+                background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+            }
+
+        /* Footer Styles */
+        .custom-footer {
+            background: linear-gradient(135deg, #6b5638 0%, #8b6f47 100%);
+            padding: 2rem 0;
+            margin-top: 4rem;
+            border-top: 3px solid #d4c4b0;
+        }
+
+        .footer-content {
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .footer-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: 0.5rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+            .footer-link:hover {
+                background: rgba(255, 255, 255, 0.1);
+                color: #fff;
+            }
+
+        /* Container adjustment */
+        .main-container {
+            min-height: calc(100vh - 200px);
+        }
+
+        /* Badge for cart */
+        .cart-badge {
+            position: relative;
+        }
+
+            .cart-badge::after {
+                content: '';
+                position: absolute;
+                top: 5px;
+                right: 5px;
+                width: 8px;
+                height: 8px;
+                background: #ff6b6b;
+                border-radius: 50%;
+                border: 2px solid #8b6f47;
+            }
+    </style>
 </head>
-<body>
+<body style="background: #f5f5f0;">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background: #704E0B">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm custom-navbar">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="color:white">DSWGrupo01</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                <a class="navbar-brand navbar-brand-custom" asp-area="" asp-controller="Home" asp-action="Index">
+                    <span class="brand-icon">💿</span>
+                    Vinyl Paradise
+                </a>
+                <button class="navbar-toggler navbar-toggler-custom" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link" style="color:white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link nav-link-custom" asp-area="" asp-controller="Home" asp-action="Index">
+                                🏠 Home
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color:white" asp-area="" asp-controller="Carrito" asp-action="Index">Carrito</a>
+                            <a class="nav-link nav-link-custom cart-badge" asp-area="" asp-controller="Carrito" asp-action="Index">
+                                🛒 Carrito
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color:white"  asp-area="" asp-controller="Vinilo" asp-action="Index">Vinilo</a>
+                            <a class="nav-link nav-link-custom" asp-area="" asp-controller="Vinilo" asp-action="Index">
+                                🎵 Vinilo
+                            </a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container main-container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted" style="background: #704E0B">
-        <div class="container" style="color:white">
-            &copy; 2025 - DSWGrupo01 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="custom-footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="mb-2">
+                    &copy; 2025 Vinyl Paradise - Donde la música cobra vida
+                </p>
+                <p class="mb-0">
+                    <a asp-area="" asp-controller="Home" asp-action="Privacy" class="footer-link">Política de Privacidad</a>
+                    <span class="mx-2">|</span>
+                    <span>Hecho con ❤️ para los amantes del vinilo</span>
+                </p>
+            </div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
