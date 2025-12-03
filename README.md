@@ -1,0 +1,2 @@
+RAMA A USAR: secondary
+VERSION DE SDK: SDK 8
