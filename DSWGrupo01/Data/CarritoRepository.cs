@@ -42,17 +42,48 @@ public class CarritoRepository
         {
             con.Open();
 
-            var cmd = new SqlCommand(@"
+            var checkCmd = new SqlCommand(@"
+            SELECT Id, Cantidad
+            FROM CarritoProducto
+            WHERE CarritoId = @c AND ViniloId = @v
+        ", con);
+
+            checkCmd.Parameters.AddWithValue("@c", carritoId);
+            checkCmd.Parameters.AddWithValue("@v", viniloId);
+
+            var rd = checkCmd.ExecuteReader();
+
+            if (rd.Read())
+            {
+                int itemId = rd.GetInt32(0);
+                rd.Close();
+
+                var updateCmd = new SqlCommand(@"
+                UPDATE CarritoProducto
+                SET Cantidad = Cantidad + @k
+                WHERE Id = @id
+            ", con);
+
+                updateCmd.Parameters.AddWithValue("@k", cantidad);
+                updateCmd.Parameters.AddWithValue("@id", itemId);
+                updateCmd.ExecuteNonQuery();
+            }
+            else
+            {
+                rd.Close();
+
+                var insertCmd = new SqlCommand(@"
                 INSERT INTO CarritoProducto(CarritoId,ViniloId,Cantidad,Precio)
                 VALUES(@c,@v,@k,@p)
             ", con);
 
-            cmd.Parameters.AddWithValue("@c", carritoId);
-            cmd.Parameters.AddWithValue("@v", viniloId);
-            cmd.Parameters.AddWithValue("@k", cantidad);
-            cmd.Parameters.AddWithValue("@p", precio);
+                insertCmd.Parameters.AddWithValue("@c", carritoId);
+                insertCmd.Parameters.AddWithValue("@v", viniloId);
+                insertCmd.Parameters.AddWithValue("@k", cantidad);
+                insertCmd.Parameters.AddWithValue("@p", precio);
 
-            cmd.ExecuteNonQuery();
+                insertCmd.ExecuteNonQuery();
+            }
         }
     }
 
