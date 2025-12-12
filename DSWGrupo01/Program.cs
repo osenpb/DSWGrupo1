@@ -20,8 +20,8 @@ builder.Services.AddScoped<VentaRepository>();
 builder.Services.AddScoped<VentaService>();
 builder.Services.AddScoped<CarritoRepository>();
 builder.Services.AddScoped<CarritoService>();
-builder.Services.AddScoped<ViniloRepository>(); // para inyeccion de dependencias
-builder.Services.AddScoped<ViniloService>(); // para inyeccion de dependencias
+builder.Services.AddScoped<ViniloRepository>(); 
+builder.Services.AddScoped<ViniloService>(); 
 builder.Services.AddScoped<HomeService>();
 
 var app = builder.Build();

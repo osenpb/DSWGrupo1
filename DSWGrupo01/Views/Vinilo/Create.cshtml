@@ -51,6 +51,12 @@
             </div>
 
             <div class="form-group">
+                <label asp-for="Preview" class="control-label"></label>
+                <input asp-for="Preview" class="form-control" />
+                <span asp-validation-for="Preview" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
                 <label asp-for="Descripcion" class="control-label"></label>
                 <input asp-for="Descripcion" class="form-control" />
                 <span asp-validation-for="Descripcion" class="text-danger"></span>

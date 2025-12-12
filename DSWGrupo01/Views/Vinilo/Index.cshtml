@@ -4,59 +4,178 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Vinilos</h1>
+@section Styles {
+    <link rel="stylesheet" href="~/css/lista_admin.css" />
+}
 
-<p>
-    <a asp-action="Create" class="btn btn-primary">Crear Nuevo</a>
-</p>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Titulo</th>
-            <th>Artista</th>
-            <th>Año</th>
-            <th>Precio</th>
-            <th>Stock</th>
-            <th>Preview</th>
-            <th>ImgUrl</th>
-            <th>Descripcion</th>
-            <th>Fecha de ingreso</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.Id</td>
-            <td>@item.Titulo</td>
-            <td>@item.Artista</td>
-            <td>@item.Anio</td>
-            <td>@item.Precio</td>
-            <td>@item.Stock</td>
-            <td>
-                <iframe width="1" height="1"
-                  src="@item.Preview">
-                </iframe> 
-            </td>
-            <td>
-               <img src="@item.ImagenUrl" alt="Imagen del vinilo" width="100" height="100"/>
-            </td>
-            <td>@item.Descripcion</td>
-            <td>@item.FechaIngreso</td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline">
-                    @Html.AntiForgeryToken()
-                    <button type="submit" class="btn btn-link">Delete</button>
-                </form>
-            </td>
-        </tr>
+<style>
+    .play-circle {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #007bff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        cursor: pointer;
+        font-size: 22px;
+        border: none;
     }
-    </tbody>
 
-    
-</table>
+        .play-circle:hover {
+            background-color: #0056b3;
+        }
+
+    .hidden-audio {
+        display: none;
+    }
+</style>
+
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h1 class="dashboard-title">Panel de administración </h1>
+        <p class="dashboard-subtitle">Gestiona tu colección de vinilos</p>
+    </div>
+
+    <div class="content-card">
+        <div class="content-header">
+            <h2 class="content-title">Catálogo de Vinilos</h2>
+            <a asp-action="Create" class="btn-create">
+                <span>➕</span> Agregar Nuevo Vinilo
+            </a>
+        </div>
+
+        <div class="table-container">
+            @if (Model.Any())
+            {
+                <table class="vinyl-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Vinilo</th>
+                            <th>Año</th>
+                            <th>Precio</th>
+                            <th>Stock</th>
+                            <th>Preview</th>
+                            <th>Imagen</th>
+                            <th>Descripción</th>
+                            <th>Fecha Ingreso</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td><strong>#@item.Id</strong></td>
+                                <td>
+                                    <div class="vinyl-title">@item.Titulo</div>
+                                    <div class="vinyl-artist">@item.Artista</div>
+                                </td>
+                                <td>@item.Anio.Year</td>
+                                <td>
+                                    <span class="price-tag">S/ @item.Precio.ToString("N2")</span>
+                                </td>
+                                <td>
+                                    @{
+                                        var stockClass = item.Stock > 10 ? "stock-high" : (item.Stock > 5 ? "stock-medium" : "stock-low");
+                                    }
+                                    <span class="stock-badge @stockClass">@item.Stock unidades</span>
+                                </td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(item.Preview))
+                                    {
+                                        <div class="audio-player">
+                                            <button class="play-btn" onclick="toggleAudio(this)" title="Reproducir preview">
+                                                ►
+                                            </button>
+                                            <audio class="hidden-audio">
+                                                <source src="@item.Preview" type="audio/mpeg" />
+                                            </audio>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <span class="no-preview">Sin preview</span>
+                                    }
+                                </td>
+                                <td>
+                                    <img src="@item.ImagenUrl" alt="@item.Titulo" class="vinyl-img" />
+                                </td>
+                                <td>
+                                    @(item.Descripcion?.Length > 50 ? item.Descripcion.Substring(0, 50) + "..." : item.Descripcion)
+                                </td>
+                                <td>@item.FechaIngreso</td>
+                                <td>
+                                    <div class="action-btns">
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn-action btn-edit">
+                                            ✏️ Editar
+                                        </a>
+                                        @* <a asp-action="Details" asp-route-id="@item.Id" class="btn-action btn-details"> *@
+                                        @*     👁️ Ver *@
+                                        @* </a> *@
+                                        <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline" onsubmit="return confirm('¿Estás seguro de eliminar este vinilo?');">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="btn-action btn-delete">
+                                                🗑️ Eliminar
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="empty-state">
+                    <div class="empty-icon">📀</div>
+                    <p class="empty-text">No hay vinilos en el catálogo</p>
+                    <a asp-action="Create" class="btn-create">
+                        <span>➕</span> Agregar tu Primer Vinilo
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+     const MAX_DURATION = 10; // duración máxima permitida en segundos
+
+    function toggleAudio(button) {
+        const audio = button.nextElementSibling;
+
+        if (audio.paused) {
+            audio.play();
+            button.textContent = '❚❚';
+
+            // Limitar duración
+            const limiter = setInterval(() => {
+                if (audio.currentTime >= MAX_DURATION) {
+                    audio.pause();
+                    audio.currentTime = 0; // Reinicia al inicio
+                    button.textContent = '►';
+                    clearInterval(limiter);
+                }
+            }, 200);
+
+            audio.limiter = limiter;
+
+        } else {
+            audio.pause();
+            button.textContent = '►';
+
+            if (audio.limiter) clearInterval(audio.limiter);
+        }
+
+        // Cuando termine solo (si es más largo)
+        audio.onended = () => {
+            button.textContent = '►';
+            if (audio.limiter) clearInterval(audio.limiter);
+        };
+    }
+</script>

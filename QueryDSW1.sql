@@ -53,11 +53,11 @@ CREATE TABLE Vinilo (
 
 INSERT INTO Vinilo (titulo, artista, anio, precio, stock, preview, descripcion, fecha_ingreso, imagen_url)
 VALUES
-('Thriller', 'Michael Jackson', '1/01/1982', 120.50, 10, 'http://dojiw2m9tvv09.cloudfront.net/69046/product/default1736899652259430.jpg', 'Vinilo clásico de MJ', '1/01/2010 00:00:00', 'http://dojiw2m9tvv09.cloudfront.net/69046/product/default1736899652259430.jpg'),
-('Back in Black', 'AC/DC', '1/01/1980', 110.00, 8, 'https://dojiw2m9tvv09.cloudfront.net/69046/product/default2110.png', 'Rock legendario', '1/01/2010 00:00:00', 'https://dojiw2m9tvv09.cloudfront.net/69046/product/default2110.png'),
-('The Dark Side of the Moon', 'Pink Floyd', '1/01/1973', 150.00, 5, 'https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png', 'Álbum icónico', '1/01/2010 00:00:00', 'https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png'),
-('Abbey Road', 'The Beatles', '1/01/1969', 140.50, 12, 'https://vinilos.pe/wp-content/uploads/2022/07/BEATLES-ABBEY.png', 'Clásico de The Beatles', '1/01/2010 00:00:00', 'https://vinilos.pe/wp-content/uploads/2022/07/BEATLES-ABBEY.png'),
-('Nevermind', 'Nirvana', '1/01/1991', 130.00, 7, 'https://vinilos.pe/wp-content/uploads/2020/02/ab67616d0000b273e175a19e530c898d167d39bf.jpeg', 'Grunge histórico', '1/01/2010 00:00:00', 'https://vinilos.pe/wp-content/uploads/2020/02/ab67616d0000b273e175a19e530c898d167d39bf.jpeg');
+('Thriller', 'Michael Jackson', '1/01/1982', 120.50, 10, 'https://eatkxdfnzqpqmtljjxye.supabase.co/storage/v1/object/public/previews/Michael_Jackson_Thriller.mp3', 'Vinilo clásico de MJ', '1/01/2010 00:00:00', 'http://dojiw2m9tvv09.cloudfront.net/69046/product/default1736899652259430.jpg'),
+('Back in Black', 'AC/DC', '1/01/1980', 110.00, 8, 'https://eatkxdfnzqpqmtljjxye.supabase.co/storage/v1/object/public/previews/ACDC_Back_In_Black.mp3', 'Rock legendario', '1/01/2010 00:00:00', 'https://dojiw2m9tvv09.cloudfront.net/69046/product/default2110.png'),
+('The Dark Side of the Moon', 'Pink Floyd', '1/01/1973', 150.00, 5, 'https://eatkxdfnzqpqmtljjxye.supabase.co/storage/v1/object/public/previews/Pink_Floyd_Brain_Damage.mp3', 'Álbum icónico', '1/01/2010 00:00:00', 'https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png'),
+('Abbey Road', 'The Beatles', '1/01/1969', 140.50, 12, 'https://eatkxdfnzqpqmtljjxye.supabase.co/storage/v1/object/public/previews/The_Beatles_Here_Comes_The_Sun.mp3', 'Clásico de The Beatles', '1/01/2010 00:00:00', 'https://vinilos.pe/wp-content/uploads/2022/07/BEATLES-ABBEY.png'),
+('Nevermind', 'Nirvana', '1/01/1991', 130.00, 7, 'https://eatkxdfnzqpqmtljjxye.supabase.co/storage/v1/object/public/previews/Nirvana_Smells_Like_Teen_Spirit.mp3', 'Grunge histórico', '1/01/2010 00:00:00', 'https://vinilos.pe/wp-content/uploads/2020/02/ab67616d0000b273e175a19e530c898d167d39bf.jpeg');
 
 
 -- TABLA: Carrito

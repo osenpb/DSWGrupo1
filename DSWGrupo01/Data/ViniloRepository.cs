@@ -29,7 +29,7 @@ namespace DSWGrupo01.Repositories
                     cmd.Parameters.AddWithValue("@Anio", vinilo.Anio);
                     cmd.Parameters.AddWithValue("@Precio", vinilo.Precio);
                     cmd.Parameters.AddWithValue("@Stock", vinilo.Stock);
-                    cmd.Parameters.AddWithValue("@Preview", "");
+                    cmd.Parameters.AddWithValue("@Preview", vinilo.Preview);
                     cmd.Parameters.AddWithValue("@ImagenUrl", vinilo.ImagenUrl);
                     cmd.Parameters.AddWithValue("@Descripcion", vinilo.Descripcion);
                     cmd.Parameters.AddWithValue("@FechaIngreso", DateTime.Now);

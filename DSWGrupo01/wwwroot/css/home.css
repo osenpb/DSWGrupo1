@@ -1,0 +1,401 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f5f5f0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Hero Section */
+.hero-section {
+    margin-top: 20px;
+    position: relative;
+    height: 85vh;
+    background: linear-gradient(rgba(61, 50, 38, 0.7), rgba(139, 111, 71, 0.8)), url('https://i.redd.it/nyl81y4zes7b1.png') center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    overflow: hidden;
+}
+
+.hero-content {
+    z-index: 2;
+    max-width: 800px;
+    padding: 2rem;
+    animation: fadeInUp 1s ease-out;
+}
+
+.hero-title {
+    font-size: 4.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+.hero-btn {
+    display: inline-block;
+    padding: 1rem 3rem;
+    background: linear-gradient(135deg, #8b6f47 0%, #6b5638 100%);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+    .hero-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+        color: #fff;
+    }
+
+.hero-vinyl-icon {
+    position: absolute;
+    font-size: 15rem;
+    opacity: 0.1;
+    animation: rotate 20s linear infinite;
+}
+
+
+
+/* Catalog Section */
+.catalog-section {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, #f5f5f0 0%, #e8dfd0 100%);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-title {
+    font-size: 3rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #8b6f47 0%, #5d4e37 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.section-subtitle {
+    color: #8b6f47;
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+.search-container {
+    max-width: 600px;
+    margin: 0 auto 3rem;
+}
+
+.search-input {
+    background: #ffffff;
+    border: 2px solid #d4c4b0;
+    border-radius: 50px;
+    color: #5d4e37;
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(139, 111, 71, 0.1);
+}
+
+    .search-input:focus {
+        background: #ffffff;
+        border-color: #8b6f47;
+        box-shadow: 0 4px 20px rgba(139, 111, 71, 0.2);
+        color: #5d4e37;
+        outline: none;
+    }
+
+    .search-input::placeholder {
+        color: #a0826d;
+    }
+
+.search-btn {
+    background: linear-gradient(135deg, #8b6f47 0%, #6b5638 100%);
+    border: none;
+    border-radius: 50px;
+    padding: 1rem 2.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(139, 111, 71, 0.3);
+    color: #fff;
+}
+
+    .search-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 25px rgba(139, 111, 71, 0.4);
+        background: linear-gradient(135deg, #6b5638 0%, #8b6f47 100%);
+    }
+
+.vinyl-card {
+    background: #ffffff;
+    border: 2px solid #e8dfd0;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    height: 100%;
+    box-shadow: 0 4px 15px rgba(139, 111, 71, 0.1);
+}
+
+    .vinyl-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        border-color: #8b6f47;
+        box-shadow: 0 20px 40px rgba(139, 111, 71, 0.2), 0 0 30px rgba(139, 111, 71, 0.1);
+    }
+
+.vinyl-image-container {
+    position: relative;
+    overflow: hidden;
+    height: 300px;
+}
+
+.vinyl-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.vinyl-card:hover .vinyl-image {
+    transform: scale(1.1) rotate(2deg);
+}
+
+.vinyl-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, transparent 0%, rgba(139, 111, 71, 0.8) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.vinyl-card:hover .vinyl-overlay {
+    opacity: 1;
+}
+
+.vinyl-body {
+    padding: 1.5rem;
+    background: #faf8f5;
+}
+
+.vinyl-title {
+    color: #3d3226;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.vinyl-artist {
+    color: #8b6f47;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.vinyl-btn {
+    background: linear-gradient(135deg, #8b6f47 0%, #6b5638 100%);
+    border: none;
+    color: #fff;
+    padding: 0.75rem;
+    border-radius: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
+
+    .vinyl-btn:hover {
+        background: linear-gradient(135deg, #6b5638 0%, #8b6f47 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(139, 111, 71, 0.3);
+        color: #fff;
+    }
+
+.vinyl-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    background: rgba(139, 111, 71, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.2rem;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.vinyl-card:hover .vinyl-icon {
+    transform: rotate(180deg);
+    background: rgba(107, 86, 56, 0.9);
+}
+
+/* About Section */
+.about-section {
+    padding: 5rem 0;
+    background: #ffffff;
+}
+
+.about-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.about-image {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(139, 111, 71, 0.2);
+}
+
+.about-content h2 {
+    font-size: 2.5rem;
+    color: #3d3226;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.about-content h3 {
+    font-size: 1.3rem;
+    color: #8b6f47;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+    font-style: italic;
+}
+
+.about-content p {
+    color: #5d4e37;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.about-features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: start;
+    gap: 1rem;
+}
+
+.feature-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #8b6f47 0%, #6b5638 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.feature-text h4 {
+    color: #3d3226;
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+}
+
+.feature-text p {
+    color: #8b6f47;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+
+.about-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.about-features {
+    grid-template-columns: 1fr;
+}
+
+
+.play-circle {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #8b6f47 0%, #6b5638 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    cursor: pointer;
+    font-size: 20px;
+    border: none;
+    margin-bottom: 1rem;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+    .play-circle:hover {
+        transform: scale(1.1);
+        background: linear-gradient(135deg, #6b5638 0%, #8b6f47 100%);
+    }
+
+
+.vinyl-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.vinyl-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.hidden-audio {
+    display: none;
+}
