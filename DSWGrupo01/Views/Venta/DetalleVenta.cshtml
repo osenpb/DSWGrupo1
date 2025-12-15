@@ -1,0 +1,54 @@
+﻿@model List<DSWGrupo01.Models.DetalleVentaViewModel>
+@{
+    ViewBag.Title = "Detalle de Venta";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/detalleventa.css" asp-append-version="true" />
+}
+
+<div class="detalleventa-wrapper">
+
+    <div class="detalleventa-card">
+
+        <h2 class="text-center mb-4 detalleventa-title">
+            Detalle de la Venta #@ViewBag.IdVenta
+        </h2>
+
+        <div class="table-responsive">
+            <table class="table table-bordered detalleventa-table">
+                <thead>
+                    <tr>
+                        <th>Vinilo</th>
+                        <th>Cantidad</th>
+                        <th>Precio Unitario</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var d in Model)
+                    {
+                        <tr>
+                            <td>@d.Titulo</td>
+                            <td>@d.Cantidad</td>
+                            <td>S/. @d.Precio_Unitario</td>
+                            <td>S/. @d.Subtotal</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="d-flex justify-content-between mt-4">
+            <a asp-action="MisVentas" class="btn btn-secondary">
+                ⬅ Volver
+            </a>
+
+            <span class="detalleventa-total">
+                Total: S/. @Model.Sum(x => x.Subtotal)
+            </span>
+        </div>
+
+    </div>
+
+</div>

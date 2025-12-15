@@ -26,5 +26,11 @@ namespace DSWGrupo01.Service
         {
             return await _repo.ObtenerPorIdAsync(idUsuario);
         }
+
+        public async Task ActualizarPerfilAsync(UsuarioPerfilViewModel model)
+        {
+            await _repo.ActualizarPerfilAsync(model);
+        }
+
     }
 }

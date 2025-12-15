@@ -1,0 +1,82 @@
+﻿/* =========================
+   LOGIN - VINYL PARADISE
+========================= */
+
+.login-wrapper {
+    min-height: calc(100vh - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-card {
+    background: #FBF6E9;
+    border-radius: 18px;
+    padding: 2.5rem 2rem;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 18px 45px rgba(107, 86, 56, 0.35);
+    animation: fadeUp 0.6s ease;
+}
+
+.login-title {
+    font-weight: 700;
+    color: #6b5638;
+    letter-spacing: 1px;
+}
+
+.login-label {
+    font-weight: 500;
+    color: #5c4a32;
+}
+
+.login-input {
+    border-radius: 10px;
+    border: 1px solid #d4c4b0;
+}
+
+    .login-input:focus {
+        border-color: #8b6f47;
+        box-shadow: 0 0 0 0.15rem rgba(139, 111, 71, 0.25);
+    }
+
+.login-btn {
+    color: white;
+    background: linear-gradient(135deg, #8b6f47, #6b5638);
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 0.6rem;
+    transition: all 0.3s ease;
+}
+
+    .login-btn:hover {
+        color: white;
+        background: linear-gradient(135deg, #6b5638, #8b6f47);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(107, 86, 56, 0.35);
+    }
+
+.login-footer a {
+    color: #6b5638;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+    .login-footer a:hover {
+        text-decoration: underline;
+    }
+
+/* Animación */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,61 @@
+﻿@model List<DSWGrupo01.Models.VentaModel>
+@{
+    ViewBag.Title = "Mis Compras";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/misventas.css" asp-append-version="true" />
+}
+
+<div class="misventas-wrapper">
+
+    <div class="misventas-card">
+
+        <h2 class="text-center mb-4 misventas-title">
+            Compras realizadas
+        </h2>
+
+        @if (Model == null || !Model.Any())
+        {
+            <div class="misventas-empty">
+                Aún no has realizado ninguna compra 🎶
+            </div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-bordered misventas-table">
+                    <thead>
+                        <tr>
+                            <th>#Venta</th>
+                            <th>Fecha</th>
+                            <th>Total</th>
+                            <th>Método</th>
+                            <th>Detalle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var v in Model)
+                        {
+                            <tr>
+                                <td>@v.Id_Venta</td>
+                                <td>@v.Fecha.ToString("dd/MM/yyyy")</td>
+                                <td>S/. @v.Total</td>
+                                <td>@v.Metodo_Pago</td>
+                                <td>
+                                    <a asp-action="DetalleVenta"
+                                       asp-route-id="@v.Id_Venta"
+                                       class="btn misventas-btn btn-sm">
+                                        Ver Detalles
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+
+    </div>
+
+</div>

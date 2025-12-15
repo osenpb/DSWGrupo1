@@ -60,5 +60,51 @@ namespace DSWGrupo01.Controllers
             TempData["msg"] = "Usuario registrado correctamente";
             return RedirectToAction("Login");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> MiPerfil()
+        {
+            var idUsuario = HttpContext.Session.GetInt32("idUsuario");
+            if (idUsuario == null)
+                return RedirectToAction("Login");
+
+            var user = await _service.ObtenerPorIdAsync(idUsuario.Value);
+            if (user == null)
+                return RedirectToAction("Login");
+
+            var model = new UsuarioPerfilViewModel
+            {
+                Id_Usuario = user.Id_Usuario,
+                Id_Rol = user.Id_Rol,
+                Nombre = user.Nombre,
+                Email = user.Email,
+                Dni = user.Dni,
+                Direccion = user.Direccion,
+                Telefono = user.Telefono
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> MiPerfil(UsuarioPerfilViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            await _service.ActualizarPerfilAsync(model);
+
+            HttpContext.Session.SetString("usuario", model.Nombre);
+
+            TempData["Mensaje"] = "Perfil actualizado correctamente";
+            return RedirectToAction("MiPerfil");
+        }
+
+        public IActionResult CerrarSesion()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Login", "Usuario");
+        }
     }
 }

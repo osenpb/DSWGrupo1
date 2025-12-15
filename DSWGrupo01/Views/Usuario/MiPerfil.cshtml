@@ -1,0 +1,78 @@
+﻿@model DSWGrupo01.Models.UsuarioPerfilViewModel
+@{
+    ViewBag.Title = "Mi Perfil";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/perfil.css" asp-append-version="true" />
+}
+
+<div class="profile-wrapper">
+
+    <div class="profile-card">
+
+        <h2 class="text-center mb-4 profile-title">
+            👤 Mi Perfil
+        </h2>
+
+        @if (TempData["Mensaje"] != null)
+        {
+            <div class="alert alert-success profile-alert text-center">
+                @TempData["Mensaje"]
+            </div>
+        }
+
+        <form asp-action="MiPerfil" method="post">
+            @Html.AntiForgeryToken()
+
+            <input type="hidden" asp-for="Id_Usuario" />
+
+            <div class="mb-3">
+                <label class="form-label profile-label">Email</label>
+                <input asp-for="Email" class="form-control profile-input" readonly />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label profile-label">DNI</label>
+                <input asp-for="Dni" class="form-control profile-input" readonly />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Nombre" class="form-label profile-label"></label>
+                <input asp-for="Nombre" class="form-control profile-input" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Direccion" class="form-label profile-label"></label>
+                <input asp-for="Direccion" class="form-control profile-input" />
+                <span asp-validation-for="Direccion" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Telefono" class="form-label profile-label"></label>
+                <input asp-for="Telefono" class="form-control profile-input" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="NuevaContrasenia" class="form-label profile-label"></label>
+                <input asp-for="NuevaContrasenia" type="password" class="form-control profile-input" />
+                <span asp-validation-for="NuevaContrasenia" class="text-danger"></span>
+                <div class="profile-hint mt-1">
+                    Dejar vacío si no desea cambiar la contraseña
+                </div>
+            </div>
+
+            <button type="submit" class="btn profile-btn w-100">
+                Guardar cambios
+            </button>
+        </form>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

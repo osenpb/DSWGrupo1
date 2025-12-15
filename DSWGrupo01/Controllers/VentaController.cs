@@ -103,5 +103,26 @@ namespace DSWGrupo01.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> MisVentas()
+        {
+            var idUsuario = HttpContext.Session.GetInt32("idUsuario");
+            var rol = HttpContext.Session.GetInt32("rol");
+
+            if (idUsuario == null || rol == null)
+                return RedirectToAction("Login", "Usuario");
+
+            var ventas = await _ventaService.ListarVentasAsync(idUsuario, rol.Value);
+            return View(ventas);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DetalleVenta(int id)
+        {
+            var detalles = await _ventaService.ObtenerDetalleVentaAsync(id);
+            ViewBag.IdVenta = id;
+            return View(detalles);
+        }
     }
 }

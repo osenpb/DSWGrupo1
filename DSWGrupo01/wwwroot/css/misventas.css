@@ -1,0 +1,82 @@
+﻿/* =========================
+   MIS VENTAS - VINYL PARADISE
+========================= */
+
+.misventas-wrapper {
+    min-height: calc(100vh - 200px);
+    display: flex;
+    justify-content: center;
+    padding-top: 2rem;
+}
+
+.misventas-card {
+    background: #FBF6E9;
+    border-radius: 18px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 900px;
+    box-shadow: 0 20px 45px rgba(107, 86, 56, 0.35);
+    animation: fadeUp 0.6s ease;
+}
+
+.misventas-title {
+    font-weight: 700;
+    color: #6b5638;
+    letter-spacing: 1px;
+}
+
+.misventas-table thead {
+    background: linear-gradient(135deg, #8b6f47, #6b5638);
+    color: #fff;
+}
+
+.misventas-table th,
+.misventas-table td {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.misventas-table tbody tr {
+    transition: background 0.2s ease;
+}
+
+    .misventas-table tbody tr:hover {
+        background: #f1e8d8;
+    }
+
+.misventas-btn {
+    background: linear-gradient(135deg, #8b6f47, #6b5638);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-weight: 500;
+    padding: 0.35rem 0.75rem;
+    transition: all 0.3s ease;
+}
+
+    .misventas-btn:hover {
+        background: linear-gradient(135deg, #6b5638, #8b6f47);
+        color: #fff;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(107, 86, 56, 0.35);
+    }
+
+.misventas-empty {
+    text-align: center;
+    font-weight: 500;
+    color: #7a684d;
+    padding: 2rem;
+}
+
+/* Animación */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

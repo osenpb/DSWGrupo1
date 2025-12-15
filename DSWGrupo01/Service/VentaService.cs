@@ -72,5 +72,15 @@ namespace DSWGrupo01.Service
             if (model.Id_Carrito.HasValue)
                 await _repo.EliminarCarritoAsync(model.Id_Carrito.Value);
         }
+
+        public async Task<List<VentaModel>> ListarVentasAsync(int? idUsuario, int idRol)
+        {
+            return await _repo.ObtenerVentasAsync(idUsuario, idRol);
+        }
+
+        public async Task<List<DetalleVentaViewModel>> ObtenerDetalleVentaAsync(int idVenta)
+        {
+            return await _repo.ObtenerDetalleVentaAsync(idVenta);
+        }
     }
 }

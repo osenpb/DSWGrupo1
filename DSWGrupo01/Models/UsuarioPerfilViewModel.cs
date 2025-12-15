@@ -2,42 +2,40 @@
 
 namespace DSWGrupo01.Models
 {
-    public class UsuarioModel
+    public class UsuarioPerfilViewModel
     {
         public int Id_Usuario { get; set; }
 
+        [Display(Name = "Rol")]
         public int Id_Rol { get; set; }
 
         [Required(ErrorMessage = "Nombre obligatorio")]
         [StringLength(100, ErrorMessage = "El nombre no debe superar los 100 caracteres")]
-        public String Nombre { get; set; }
+        public string Nombre { get; set; }
 
         [Required(ErrorMessage = "El correo es obligatorio")]
         [EmailAddress(ErrorMessage = "Correo electrónico invalido")]
         [StringLength(100, ErrorMessage = "El correo no debe superar los 100 caracteres")]
         [Display(Name = "Correo")]
-        public String Email { get; set; }
-
-        [Required(ErrorMessage = "La contraseña es obligatoria")]
-        [DataType(DataType.Password)]
-        [RegularExpression(@"^(?=(?:.*\d){3,}).{6,}$", ErrorMessage = "La contraseña debe tener mínimo 6 caracteres y al menos 3 números.")]
-        [Display(Name = "Contraseña")]
-        public string Contrasenia { get; set; }
+        public string Email { get; set; } // solo lectura
 
         [Required(ErrorMessage = "Dni obligatorio")]
         [StringLength(8, MinimumLength = 8, ErrorMessage = "Ingrese los 8 dígitos de su DNI")]
-        public String Dni {  get; set; }
+        public string Dni { get; set; }   // solo lectura
 
         [Required(ErrorMessage = "Dirección obligatoria")]
         [StringLength(150, ErrorMessage = "La dirección no debe superar los 150 caracteres")]
         [Display(Name = "Dirección")]
-        public String Direccion {  get; set; }
+        public string Direccion { get; set; }
 
         [Required(ErrorMessage = "Teléfono obligatorio")]
         [RegularExpression(@"^(\d{7}|\d{9})$", ErrorMessage = "El teléfono debe tener exactamente 7 o 9 números")]
         [Display(Name = "Teléfono")]
-        public String Telefono { get; set; }
+        public string Telefono { get; set; }
 
-        public DateTime Fecha_Registro { get; set; } = DateTime.Now;
+        [DataType(DataType.Password)]
+        [RegularExpression(@"^(?=(?:.*\d){3,}).{6,}$", ErrorMessage = "La contraseña debe tener mínimo 6 caracteres y al menos 3 números.")]
+        [Display(Name = "Nueva Contraseña")]
+        public string? NuevaContrasenia { get; set; }
     }
 }

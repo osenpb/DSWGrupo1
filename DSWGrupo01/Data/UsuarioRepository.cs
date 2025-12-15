@@ -112,5 +112,34 @@ namespace DSWGrupo01.Data
             }
             return user;
         }
+
+        public async Task ActualizarPerfilAsync(UsuarioPerfilViewModel model)
+        {
+            string sql = @"UPDATE Usuario SET
+                            Nombre = @Nombre,
+                            Direccion = @Direccion,
+                            Telefono = @Telefono{0}
+                        WHERE Id_Usuario = @IdUsuario";
+
+            string passSql = string.IsNullOrEmpty(model.NuevaContrasenia) ? "" : ", Contrasenia = @Contrasenia";
+
+            sql = string.Format(sql, passSql);
+
+            using (var conn = new SqlConnection(_connectionString))
+            using (var cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@Nombre", model.Nombre);
+                cmd.Parameters.AddWithValue("@Direccion", model.Direccion);
+                cmd.Parameters.AddWithValue("@Telefono", model.Telefono);
+                cmd.Parameters.AddWithValue("@IdUsuario", model.Id_Usuario);
+
+                if (!string.IsNullOrEmpty(model.NuevaContrasenia))
+                    cmd.Parameters.AddWithValue("@Contrasenia", model.NuevaContrasenia);
+
+                await conn.OpenAsync();
+                await cmd.ExecuteNonQueryAsync();
+            }
+        }
+
     }
 }

@@ -13,38 +13,6 @@ namespace DSWGrupo01.Data
             _connectionString = config.GetConnectionString("DSWGrupo01");
         }
 
-        // Obtener carrito por sessionId (invitados)
-        //public async Task<Carrito?> ObtenerCarritoPorSession(string sessionId)
-        //{
-        //    Carrito? carrito = null;
-
-        //    var sql = @"SELECT Id, sessionId, fecha_ingreso 
-        //                FROM Carrito 
-        //                WHERE sessionId = @sessionId";
-
-        //    using (var conn = new SqlConnection(_connectionString))
-        //    using (var cmd = new SqlCommand(sql, conn))
-        //    {
-        //        cmd.Parameters.AddWithValue("@sessionId", sessionId);
-
-        //        await conn.OpenAsync();
-        //        using (var reader = await cmd.ExecuteReaderAsync())
-        //        {
-        //            if (await reader.ReadAsync())
-        //            {
-        //                carrito = new Carrito
-        //                {
-        //                    Id = reader.GetInt32(0),
-        //                    Id_Usuario = reader.GetInt32(1),
-        //                    Fecha_Ingreso = reader.GetDateTime(2)
-        //                };
-        //            }
-        //        }
-        //    }
-
-        //    return carrito;
-        //}
-
         public async Task<Carrito?> ObtenerCarritoPorUsuario(int id)
         {
             Carrito? carrito = null;
@@ -181,6 +149,82 @@ namespace DSWGrupo01.Data
                     await cmd2.ExecuteNonQueryAsync();
                 }
             }
+        }
+
+        public async Task<List<VentaModel>> ObtenerVentasAsync(int? idUsuario, int idRol)
+        {
+            var ventas = new List<VentaModel>();
+
+            string sql = idRol == 1
+                ? @"SELECT * FROM Venta ORDER BY Fecha DESC"
+                : @"SELECT * FROM Venta WHERE Id_Usuario = @IdUsuario ORDER BY Fecha DESC";
+
+            using (var conn = new SqlConnection(_connectionString))
+            using (var cmd = new SqlCommand(sql, conn))
+            {
+                if (idRol == 2)
+                    cmd.Parameters.AddWithValue("@IdUsuario", idUsuario);
+
+                await conn.OpenAsync();
+                using (var reader = await cmd.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        ventas.Add(new VentaModel
+                        {
+                            Id_Venta = reader.GetInt32(0),
+                            Id_Usuario = reader.IsDBNull(1) ? null : reader.GetInt32(1),
+                            Nombre_Destinatario = reader.GetString(2),
+                            Email_Destinatario = reader.GetString(3),
+                            Telefono_Destinatario = reader.GetString(4),
+                            Direccion_Envio = reader.GetString(5),
+                            Metodo_Pago = reader.GetString(6),
+                            Total = reader.GetDecimal(7),
+                            Fecha = reader.GetDateTime(8)
+                        });
+                    }
+                }
+            }
+
+            return ventas;
+        }
+
+        public async Task<List<DetalleVentaViewModel>> ObtenerDetalleVentaAsync(int idVenta)
+        {
+            var lista = new List<DetalleVentaViewModel>();
+
+            string sql = @"
+        SELECT 
+            V.Id AS Id_Vinilo,
+            V.titulo,
+            DV.Cantidad,
+            DV.Precio_Unitario
+        FROM DetalleVenta DV
+        INNER JOIN Vinilo V ON V.Id = DV.Id_Vinilo
+        WHERE DV.Id_Venta = @IdVenta";
+
+            using (var conn = new SqlConnection(_connectionString))
+            using (var cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@IdVenta", idVenta);
+                await conn.OpenAsync();
+
+                using (var reader = await cmd.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        lista.Add(new DetalleVentaViewModel
+                        {
+                            Id_Vinilo = reader.GetInt32(0),
+                            Titulo = reader.GetString(1),
+                            Cantidad = reader.GetInt32(2),
+                            Precio_Unitario = reader.GetDecimal(3)
+                        });
+                    }
+                }
+            }
+
+            return lista;
         }
     }
 }
