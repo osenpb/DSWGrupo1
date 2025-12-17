@@ -53,11 +53,62 @@ CREATE TABLE Vinilo (
 
 INSERT INTO Vinilo (titulo, artista, anio, precio, stock, preview, descripcion, fecha_ingreso, imagen_url)
 VALUES
-('Thriller', 'Michael Jackson', '1/01/1982', 120.50, 10, 'https://eatkxdfnzqpqmtljjxye.supabase.co/storage/v1/object/public/previews/Michael_Jackson_Thriller.mp3', 'Vinilo clásico de MJ', '1/01/2010 00:00:00', 'http://dojiw2m9tvv09.cloudfront.net/69046/product/default1736899652259430.jpg'),
-('Back in Black', 'AC/DC', '1/01/1980', 110.00, 8, 'https://eatkxdfnzqpqmtljjxye.supabase.co/storage/v1/object/public/previews/ACDC_Back_In_Black.mp3', 'Rock legendario', '1/01/2010 00:00:00', 'https://dojiw2m9tvv09.cloudfront.net/69046/product/default2110.png'),
-('The Dark Side of the Moon', 'Pink Floyd', '1/01/1973', 150.00, 5, 'https://eatkxdfnzqpqmtljjxye.supabase.co/storage/v1/object/public/previews/Pink_Floyd_Brain_Damage.mp3', 'Álbum icónico', '1/01/2010 00:00:00', 'https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png'),
-('Abbey Road', 'The Beatles', '1/01/1969', 140.50, 12, 'https://eatkxdfnzqpqmtljjxye.supabase.co/storage/v1/object/public/previews/The_Beatles_Here_Comes_The_Sun.mp3', 'Clásico de The Beatles', '1/01/2010 00:00:00', 'https://vinilos.pe/wp-content/uploads/2022/07/BEATLES-ABBEY.png'),
-('Nevermind', 'Nirvana', '1/01/1991', 130.00, 7, 'https://eatkxdfnzqpqmtljjxye.supabase.co/storage/v1/object/public/previews/Nirvana_Smells_Like_Teen_Spirit.mp3', 'Grunge histórico', '1/01/2010 00:00:00', 'https://vinilos.pe/wp-content/uploads/2020/02/ab67616d0000b273e175a19e530c898d167d39bf.jpeg');
+(
+ 'Thriller',
+ 'Michael Jackson',
+ '1982-01-01',
+ 120.50,
+ 10,
+ 'https://eatkxdfnzqpqmtljjxye.supabase.co/storage/v1/object/public/previews/Michael_Jackson_Thriller.mp3',
+ 'Thriller es el álbum más vendido de la historia. Combina pop, funk y rock con canciones icónicas como Billie Jean y Beat It, consolidando a Michael Jackson como el Rey del Pop.',
+ '2010-01-01 00:00:00',
+ 'http://dojiw2m9tvv09.cloudfront.net/69046/product/default1736899652259430.jpg'
+),
+(
+ 'Back in Black',
+ 'AC/DC',
+ '1980-01-01',
+ 110.00,
+ 8,
+ 'https://eatkxdfnzqpqmtljjxye.supabase.co/storage/v1/object/public/previews/ACDC_Back_In_Black.mp3',
+ 'Back in Black es uno de los discos de rock más influyentes de todos los tiempos. Con riffs poderosos y energía pura, marcó una nueva etapa para AC/DC.',
+ '2010-01-01 00:00:00',
+ 'https://dojiw2m9tvv09.cloudfront.net/69046/product/default2110.png'
+),
+(
+ 'The Dark Side of the Moon',
+ 'Pink Floyd',
+ '1973-01-01',
+ 150.00,
+ 5,
+ 'https://eatkxdfnzqpqmtljjxye.supabase.co/storage/v1/object/public/previews/Pink_Floyd_Brain_Damage.mp3',
+ 'Un álbum conceptual que explora el tiempo, la vida y la locura. The Dark Side of the Moon es una obra maestra del rock progresivo.',
+ '2010-01-01 00:00:00',
+ 'https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png'
+),
+(
+ 'Abbey Road',
+ 'The Beatles',
+ '1969-01-01',
+ 140.50,
+ 12,
+ 'https://eatkxdfnzqpqmtljjxye.supabase.co/storage/v1/object/public/previews/The_Beatles_Here_Comes_The_Sun.mp3',
+ 'Abbey Road es uno de los álbumes más emblemáticos de The Beatles, famoso por su icónica portada y canciones que marcaron la historia de la música.',
+ '2010-01-01 00:00:00',
+ 'https://vinilos.pe/wp-content/uploads/2022/07/BEATLES-ABBEY.png'
+),
+(
+ 'Nevermind',
+ 'Nirvana',
+ '1991-01-01',
+ 130.00,
+ 7,
+ 'https://eatkxdfnzqpqmtljjxye.supabase.co/storage/v1/object/public/previews/Nirvana_Smells_Like_Teen_Spirit.mp3',
+ 'Nevermind redefinió el rock alternativo y llevó el grunge al público masivo, convirtiéndose en un álbum clave de los años 90.',
+ '2010-01-01 00:00:00',
+ 'https://vinilos.pe/wp-content/uploads/2020/02/ab67616d0000b273e175a19e530c898d167d39bf.jpeg'
+);
+
 
 
 -- TABLA: Carrito

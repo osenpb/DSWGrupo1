@@ -1,4 +1,10 @@
 ﻿@model DSWGrupo01.Models.ViniloModel
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
 @section Styles {
     <link rel="stylesheet" href="~/css/carrito.css" />
 }
@@ -12,9 +18,8 @@
         <h2 class="textTitel">@Model.Titulo</h2>
 
         <p class="precio py-4">S/ @Model.Precio </p>
-        <p class="details">Artista: @Model.Artista</p>
-        <p class="details">Año:@Model.Anio.Year</p>
-        <p class="details">Descripción:@Model.Descripcion</p>
+        <p class="text_data">Artista: @Model.Artista</p>
+        <p class="text_data">Año:@Model.Anio.Year</p>
         <p class="available py-2">Disponibles: @Model.Stock</p>
 
         <form asp-controller="Carrito" asp-action="Agregar" method="post" class="mt-3">
@@ -33,6 +38,17 @@
 
     </div>
 </div>
+<div class="row g-4 mt-5">
+    <div class="col-12">
+        <div class="descripcion-box">
+            <h5 class="mb-2">Descripción</h5>
+            <p class="details">@Model.Descripcion</p>
+        </div>
+    </div>
+</div>
+
+
+
 @section Scripts {
     <script src="~/js/cariito_detalles.js"></script>
 }
