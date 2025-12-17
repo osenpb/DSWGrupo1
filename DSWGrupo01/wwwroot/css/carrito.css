@@ -15,6 +15,14 @@
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     }
 
+.vinili-imagen-cariito {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+
+
 
 
 /* Contenedor de cantidad */
@@ -69,15 +77,26 @@
   
 }
 
-.precio {
-    font-size: 30px;
-    font-style: normal;
-    color: #0066CC;
-    font-family: 'Oswald', sans-serif;
+.textTitelCarrito {
+    font-family: "Bebas Neue", sans-serif;
     font-optical-sizing: auto;
-    font-variation-settings: "wdth" 100;
-    font-weight: bold;
+    font-style: normal;
+    font-size: 27px;
+    font-weight: 400;
+    color: #3d3226;
 }
+
+
+
+    .precio {
+        font-size: 30px;
+        font-style: normal;
+        color: #0066CC;
+        font-family: 'Oswald', sans-serif;
+        font-optical-sizing: auto;
+        font-variation-settings: "wdth" 100;
+        font-weight: bold;
+    }
 
 .descripcion-box {
     background-color: #f8f9fa;
@@ -114,3 +133,59 @@
     
 }
 
+.carrito-titulo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: #FF6F61; /* un color llamativo */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.total-section {
+ 
+    font-family: 'Poppins', sans-serif;
+}
+
+    .total-section h3 {
+        font-weight: 600;
+        font-size: 1.8rem;
+        color: #333;
+    }
+
+    .total-section .btn-success {
+        padding: 0.75rem 1.5rem;
+        font-size: 1.2rem;
+    }
+
+.precio_carrito {
+    font-size: 15px;
+    font-style: normal;
+    color: #0066CC;
+    font-family: 'Oswald', sans-serif;
+    font-optical-sizing: auto;
+    font-variation-settings: "wdth" 100;
+    font-weight: bold;
+}
+
+.btn-send {
+    outline: none;
+    text-decoration: none;
+    background: #198754; /* degradado verde */
+    border: none; /* quita borde */
+    border-radius: 9px; /* esquinas redondeadas */
+    padding: 0.75rem 1.8rem; /* tamaño cómodo */
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* sombra suave */
+    transition: all 0.3s ease; /* transición suave para hover */
+}
+
+.botn-send:active {
+    color: #fff; /* asegura que el texto no cambie */
+    background: linear-gradient(135deg, #1e7e34, #28a745); /* efecto hover */
+    text-decoration: none;
+    outline: none; /* quita el borde azul de foco */
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
