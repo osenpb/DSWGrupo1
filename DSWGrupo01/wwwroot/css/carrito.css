@@ -1,0 +1,84 @@
+﻿/* Imagen del vinilo */
+.vinilo-imagen {
+    max-width: 500px; /* 👈 CAMBIA ESTE VALOR para el tamaño de la imagen */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 15px 0;
+    transition: all 0.3s ease; /* Transición suave */
+    cursor: pointer;
+}
+
+    /* Efecto al pasar el mouse - Opción 1: Elevación */
+    .vinilo-imagen:hover {
+        transform: translateY(-10px) scale(1.05); /* Mueve hacia arriba y agranda */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+
+
+/* Contenedor de cantidad */
+.cantidad-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+/* Input de cantidad */
+.cantidad-input {
+    width: 70px;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Botones de incremento/decremento */
+.btn-cantidad {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .btn-cantidad:hover {
+        background-color: #e9ecef;
+    }
+
+/* Responsive */
+@media (max-width: 576px) {
+    .vinilo-imagen {
+        max-width: 100%;
+    }
+
+    .cantidad-container {
+        justify-content: center;
+    }
+}
+/* Letters */
+.textTitel {
+    font-size: 55px;
+    color: #3d3226;
+    text-shadow: 3px 3px 6px gray;
+}
+
+.precio {
+    font-size: 30px;
+    color: #0066CC;
+    font-weight: bold;
+}
+
+.details {
+    font-size: 20px;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    color: #555555
+}
+.available {
+    font-size: 20px;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    color: #a52019 ;
+    font-weight: bold;
+}

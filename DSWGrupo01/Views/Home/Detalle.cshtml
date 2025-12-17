@@ -1,38 +1,38 @@
 ﻿@model DSWGrupo01.Models.ViniloModel
-
-<h2>@Model.Titulo</h2>
-
-<p>Artista: @Model.Artista</p>
-<p>Precio: @Model.Precio €</p>
-<img src="@Model.ImagenUrl" style="max-width:300px;" />
-
-<form asp-controller="Carrito" asp-action="Agregar" method="post" class="mt-3">
-    <input type="hidden" name="viniloId" value="@Model.Id" />
-
-    <div style="display:flex; align-items:center; gap:10px;">
-        <button type="button" id="btnMenos" class="btn btn-outline-secondary">−</button>
-        <input id="cantidad" name="cantidad" type="number"
-               value="1" min="1"
-               style="width:70px; text-align:center;"
-               class="form-control" />
-        <button type="button" id="btnMas" class="btn btn-outline-secondary">+</button>
+@section Styles {
+    <link rel="stylesheet" href="~/css/carrito.css" />
+}
+<div class="row g-4 align-items-center mt-5">
+    <div class="col-6 ">
+        <img src="@Model.ImagenUrl" alt="@Model.Titulo" class="vinilo-imagen" />
     </div>
 
-    <button type="submit" class="btn btn-primary mt-3">Agregar al carrito</button>
-</form>
+    <div class="col-6">
 
-<script>
-    const input = document.getElementById("cantidad");
-    const minus = document.getElementById("btnMenos");
-    const plus = document.getElementById("btnMas");
+        <h2 class="textTitel">@Model.Titulo</h2>
 
-    minus.addEventListener("click", () => {
-        let val = parseInt(input.value);
-        if (val > 1) input.value = val - 1;
-    });
+        <p class="precio py-4">S/ @Model.Precio </p>
+        <p class="details">Artista: @Model.Artista</p>
+        <p class="details">Año:@Model.Anio.Year</p>
+        <p class="details">Descripción:@Model.Descripcion</p>
+        <p class="available py-2">Disponibles: @Model.Stock</p>
 
-    plus.addEventListener("click", () => {
-        let val = parseInt(input.value);
-        input.value = val + 1;
-    });
-</script>
+        <form asp-controller="Carrito" asp-action="Agregar" method="post" class="mt-3">
+            <input type="hidden" name="viniloId" value="@Model.Id" />
+
+            <div class="cantidad-container">
+                <button type="button" id="btnMenos" class="btn btn-outline-secondary btn-cantidad">−</button>
+                <input id="cantidad" name="cantidad" type="number"
+                       value="1" min="1"
+                       class="form-control cantidad-input" />
+                <button type="button" id="btnMas" class="btn btn-outline-secondary btn-cantidad">+</button>
+            </div>
+
+            <button type="submit" class="btn btn-success mt-3">Agregar al carrito</button>
+        </form>
+
+    </div>
+</div>
+@section Scripts {
+    <script src="~/js/cariito_detalles.js"></script>
+}
