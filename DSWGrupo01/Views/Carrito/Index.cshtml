@@ -14,7 +14,7 @@
 
             <div class="col-6">
                 <h5>@item.Titulo</h5>
-                <p>Precio: @item.Precio.ToString("C")</p>
+                <p>Precio: @item.Precio.ToString("C", new System.Globalization.CultureInfo("es-PE"))</p>
 
                 <div class="d-flex">
                     <button class="btn btn-outline-secondary btn-menos" data-id="@item.Id" @(item.Cantidad == 1 ? "disabled" : "")>-</button>
@@ -24,7 +24,7 @@
 
                 <p class="mt-2">
                     Subtotal:
-                    <strong>@item.Subtotal.ToString("C")</strong>
+                    <strong>@item.Subtotal.ToString("C", new System.Globalization.CultureInfo("es-PE"))</strong>
                 </p>
             </div>
 
@@ -38,7 +38,7 @@
 
     <h3 class="mt-4">
         Total:
-        @Model.Sum(x=>x.Subtotal).ToString("C")
+        @Model.Sum(x => x.Subtotal).ToString("C", new System.Globalization.CultureInfo("es-PE"))
     </h3>
 
     <a href="/Venta/FinalizarCompra" class="btn btn-success mt-3">Ir a pagar</a>
