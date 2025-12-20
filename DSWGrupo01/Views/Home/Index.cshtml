@@ -4,6 +4,16 @@
     <link rel="stylesheet" href="~/css/home.css" />
 }
 
+@if (TempData["Mensaje"] != null)
+{
+    <div class="container mt-4">
+        <div class="alert alert-success alert-dismissible fade show text-center fw-semibold" role="alert">
+            @TempData["Mensaje"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    </div>
+}
+
 <!-- Hero Section -->
 <section class="hero-section">
     <div class="hero-vinyl-icon">💿</div>
