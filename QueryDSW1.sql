@@ -107,8 +107,84 @@ VALUES
  'Nevermind redefinió el rock alternativo y llevó el grunge al público masivo, convirtiéndose en un álbum clave de los años 90.',
  '2010-01-01 00:00:00',
  'https://vinilos.pe/wp-content/uploads/2020/02/ab67616d0000b273e175a19e530c898d167d39bf.jpeg'
+),
+(
+ 'Hit ’Em Up (Dirty)',
+ '2Pac',
+ '1996-04-06',
+ 35.00,
+ 10,
+ 'https://alqgvomuoufkeoccamjz.supabase.co/storage/v1/object/public/DSWGrupo1/2Pac%20-%20Hit%20''Em%20Up%20(Dirty)%20(Music%20Video)%20HD.mp3',
+ 'Vinilo de hip-hop clásico de los años 90, uno de los temas más influyentes de 2Pac.',
+ '2010-01-01 00:00:00',
+ 'https://i.scdn.co/image/ab67616d0000b273d81a092eb373ded457d94eec'
+),
+(
+ 'Bailé Inolvidable',
+ 'Bad Bunny',
+ '2023-10-10',
+ 40.00,
+ 15,
+ 'https://alqgvomuoufkeoccamjz.supabase.co/storage/v1/object/public/DSWGrupo1/BAD%20BUNNY%20-%20BAILE%20INoLVIDABLE.mp3',
+ 'Vinilo de música urbana latina con el estilo moderno y experimental de Bad Bunny.',
+ '2010-01-01 00:00:00',
+ 'https://i.scdn.co/image/ab67616d0000b273bbd45c8d36e0e045ef640411'
+),
+(
+ 'The Scientist',
+ 'Coldplay',
+ '2002-08-26',
+ 38.00,
+ 12,
+ 'https://alqgvomuoufkeoccamjz.supabase.co/storage/v1/object/public/DSWGrupo1/Coldplay%20-%20The%20Scientist%20(Official%204K%20Video).mp3',
+ 'Vinilo de rock alternativo con una de las baladas más icónicas de Coldplay.',
+ '2010-01-01 00:00:00',
+ 'https://i.scdn.co/image/ab67616d0000b273de09e02aa7febf30b7c02d82'
+),
+(
+ 'Feid',
+ 'Feid',
+ '2020-01-01',
+ 32.00,
+ 20,
+ 'https://alqgvomuoufkeoccamjz.supabase.co/storage/v1/object/public/DSWGrupo1/Feid.mp3',
+ 'Vinilo de música urbana y reguetón del artista colombiano Feid.',
+ '2010-01-01 00:00:00',
+ 'https://i.scdn.co/image/ab6775700000ee854d2eb38e9cd5faedea8ba62b'
+),
+(
+ 'Mi Dolor',
+ 'Chacalón y La Nueva Crema',
+ '1980-01-01',
+ 45.00,
+ 8,
+ 'https://alqgvomuoufkeoccamjz.supabase.co/storage/v1/object/public/DSWGrupo1/Mi%20Dolor.mp3',
+ 'Vinilo de música chicha peruana, tema emblemático de Chacalón y patrimonio cultural popular.',
+ '2010-01-01 00:00:00',
+ 'https://i.scdn.co/image/ab67616d0000b273d5cf7c26dd51abda8051ee8e'
+),
+(
+ 'Californication',
+ 'Red Hot Chili Peppers',
+ '1999-06-08',
+ 42.00,
+ 14,
+ 'https://alqgvomuoufkeoccamjz.supabase.co/storage/v1/object/public/DSWGrupo1/Red%20Hot%20Chili%20Peppers%20-%20Californication.mp3',
+ 'Vinilo de rock alternativo con uno de los álbumes más exitosos de la banda.',
+ '2010-01-01 00:00:00',
+ 'https://i.scdn.co/image/ab67616d0000b273a9249ebb15ca7a5b75f16a90'
+),
+(
+ 'Tú con Él',
+ 'Frankie Ruiz',
+ '1991-01-01',
+ 37.00,
+ 9,
+ 'https://alqgvomuoufkeoccamjz.supabase.co/storage/v1/object/public/DSWGrupo1/Tu%20Con%20el.mp3',
+ 'Vinilo de salsa romántica, un clásico inolvidable de Frankie Ruiz.',
+ '2010-01-01 00:00:00',
+ 'https://i.scdn.co/image/ab67616d0000b27368b7273bd630c08dc4a683d8'
 );
-
 
 
 -- TABLA: Carrito
